@@ -1,6 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include <time.h>
+#include <windows.h>
 
 int linearSearch(int arr[], int n, int target) {
     for (int i = 0; i < n; i++) {
@@ -9,6 +9,16 @@ int linearSearch(int arr[], int n, int target) {
         }
     }
     return -1;  // Return -1 if the target element is not found
+}
+
+double getCurrentTime() {
+    LARGE_INTEGER frequency;
+    QueryPerformanceFrequency(&frequency);
+
+    LARGE_INTEGER start;
+    QueryPerformanceCounter(&start);
+
+    return (double)start.QuadPart / (double)frequency.QuadPart;
 }
 
 int main() {
@@ -23,7 +33,7 @@ int main() {
     srand(time(NULL));
     printf("Generated array elements:\n");
     for (int i = 0; i < n; i++) {
-        arr[i] = rand() % 100;  // Generating random numbers between 0 and 99
+        arr[i] = rand() % 10000001;  // Generating random numbers between 0 and 10,000,000
         printf("%d ", arr[i]);
     }
     printf("\n");
@@ -32,11 +42,11 @@ int main() {
     printf("Enter the element to search: ");
     scanf("%d", &target);
 
-    clock_t start = clock();  // Start the clock
+    double start = getCurrentTime();  // Start the clock
 
     int result = linearSearch(arr, n, target);
 
-    clock_t end = clock();  // Stop the clock
+    double end = getCurrentTime();  // Stop the clock
 
     if (result == -1) {
         printf("Element not found.\n");
@@ -45,7 +55,7 @@ int main() {
     }
 
     // Calculate and print the execution time
-    double execution_time = (double)(end - start) / CLOCKS_PER_SEC;
+    double execution_time = end - start;
     printf("Execution time: %lf seconds.\n", execution_time);
 
     // Free dynamically allocated memory
