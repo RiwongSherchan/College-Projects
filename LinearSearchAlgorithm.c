@@ -1,6 +1,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <windows.h>
+#include <psapi.h>
+#include <time.h>
 
 int linearSearch(int arr[], int n, int target) {
     for (int i = 0; i < n; i++) {
@@ -19,6 +21,15 @@ double getCurrentTime() {
     QueryPerformanceCounter(&start);
 
     return (double)start.QuadPart / (double)frequency.QuadPart;
+}
+
+void printMemoryUsage() {
+    HANDLE process = GetCurrentProcess();
+    PROCESS_MEMORY_COUNTERS_EX pmc;
+    if (GetProcessMemoryInfo(process, (PROCESS_MEMORY_COUNTERS*)&pmc, sizeof(pmc))) {
+        SIZE_T virtualMemoryUsed = pmc.PrivateUsage;
+        printf("Memory Usage: %zu bytes\n", virtualMemoryUsed);
+    }
 }
 
 int main() {
@@ -57,6 +68,9 @@ int main() {
     // Calculate and print the execution time
     double execution_time = end - start;
     printf("Execution time: %lf seconds.\n", execution_time);
+
+    // Print memory usage
+    printMemoryUsage();
 
     // Free dynamically allocated memory
     free(arr);
