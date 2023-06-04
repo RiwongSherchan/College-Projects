@@ -13,14 +13,17 @@ int linearSearch(int arr[], int n, int target) {
     return -1;  // Return -1 if the target element is not found
 }
 
-double getCurrentTime() {
+long long getCurrentTime() {
     LARGE_INTEGER frequency;
     QueryPerformanceFrequency(&frequency);
 
     LARGE_INTEGER start;
     QueryPerformanceCounter(&start);
 
-    return (double)start.QuadPart / (double)frequency.QuadPart;
+    // Calculate time in nanoseconds
+    long long nanoseconds = start.QuadPart * 1000000000LL / frequency.QuadPart;
+
+    return nanoseconds;
 }
 
 void printMemoryUsage() {
@@ -33,47 +36,76 @@ void printMemoryUsage() {
 }
 
 int main() {
-    int n;
-    printf("Enter the size of the array: ");
-    scanf("%d", &n);
+    int n = 5000; // Size of the array
+    int* arr = (int*)malloc(n * sizeof(int)); // Dynamically allocate memory for the array
 
-    // Dynamically allocate memory for the array
-    int* arr = (int*)malloc(n * sizeof(int));
-
-    // Generate random array elements
+    // Generate array elements
     srand(time(NULL));
-    printf("Generated array elements:\n");
     for (int i = 0; i < n; i++) {
-        arr[i] = rand() % 10000001;  // Generating random numbers between 0 and 10,000,000
-        printf("%d ", arr[i]);
+        arr[i] = rand() % 10000001; // Generating random numbers between 0 and 10,000,000
     }
-    printf("\n");
 
-    int target;
-    printf("Enter the element to search: ");
-    scanf("%d", &target);
+    // Best Case
+    printf("Best Case:\n");
+    int target = arr[0]; // Target element at the beginning of the array
 
-    double start = getCurrentTime();  // Start the clock
+    long long start = getCurrentTime(); // Start the clock
 
-    int result = linearSearch(arr, n, target);
+    int result = linearSearch(arr, n, target); // Perform linear search
 
-    double end = getCurrentTime();  // Stop the clock
+    long long end = getCurrentTime(); // Stop the clock
 
+    // Print the result and execution time
     if (result == -1) {
         printf("Element not found.\n");
     } else {
         printf("Element found at index %d.\n", result);
     }
-
-    // Calculate and print the execution time
-    double execution_time = end - start;
-    printf("Execution time: %lf seconds.\n", execution_time);
-
-    // Print memory usage
+    long long execution_time = end - start;
+    printf("Execution time: %lld nanoseconds.\n", execution_time);
     printMemoryUsage();
 
-    // Free dynamically allocated memory
-    free(arr);
+    // Average Case
+    printf("\nAverage Case:\n");
+    target = arr[n / 2]; // Target element at the middle of the array
+
+    start = getCurrentTime(); // Start the clock
+
+    result = linearSearch(arr, n, target); // Perform linear search
+
+    end = getCurrentTime(); // Stop the clock
+
+    // Print the result and execution time
+    if (result == -1) {
+        printf("Element not found.\n");
+    } else {
+        printf("Element found at index %d.\n", result);
+    }
+    execution_time = end - start;
+    printf("Execution time: %lld nanoseconds.\n", execution_time);
+    printMemoryUsage();
+
+    // Worst Case
+    printf("\nWorst Case:\n");
+    target = n + 1; // Target element not present in the array
+
+    start = getCurrentTime(); // Start the clock
+
+    result = linearSearch(arr, n, target); // Perform linear search
+
+    end = getCurrentTime(); // Stop the clock
+
+    // Print the result and execution time
+    if (result == -1) {
+        printf("Element not found.\n");
+    } else {
+        printf("Element found at index %d.\n", result);
+    }
+    execution_time = end - start;
+    printf("Execution time: %lld nanoseconds.\n", execution_time);
+    printMemoryUsage();
+
+    free(arr); // Free dynamically allocated memory
 
     return 0;
 }
