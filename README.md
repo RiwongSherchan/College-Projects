@@ -1,1 +1,4 @@
-# Data Structure and Algorithm (DSA) Class works and Projects.
+# College Works
+Branches
+DSA: Data Structure and Algorithm
+MLPC: Machine Learning and Parallel Computing
