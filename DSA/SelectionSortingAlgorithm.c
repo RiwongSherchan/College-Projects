@@ -28,7 +28,7 @@ void selectionSortRecursive(int arr[], int n, int index) {
 }
 
 double getElapsedTime(LARGE_INTEGER start, LARGE_INTEGER end, LARGE_INTEGER frequency) {
-    return ((double)(end.QuadPart - start.QuadPart) / frequency.QuadPart);
+    return ((double)(end.QuadPart - start.QuadPart) * 1e9 / frequency.QuadPart);
 }
 
 void printMemoryUsage() {
@@ -38,14 +38,15 @@ void printMemoryUsage() {
     printf("Memory Usage: %llu bytes\n", (unsigned long long)virtualMemoryUsed);
 }
 
-void printCaseResult(const char* caseName, int index, double elapsedTime) {
+void printCaseResult(const char* caseName, int foundIndex, int expectedIndex, double elapsedTime) {
     printf("%s Started\n", caseName);
-    if (index != -1) {
-        printf("Element found at index %d.\n", index);
+    if (foundIndex != -1) {
+        printf("Element found at index %d.\n", foundIndex);
     } else {
         printf("Element not found.\n");
     }
-    printf("Time elapsed: %.0lf nanoseconds\n", elapsedTime * 1e9);
+    printf("Expected index: %d\n", expectedIndex);
+    printf("Time elapsed: %.0lf nanoseconds\n", elapsedTime);
     printf("%s Ended\n\n", caseName);
     printMemoryUsage();
 }
@@ -89,7 +90,7 @@ int main() {
         executionTime = getElapsedTime(start, end, frequency);
         printf("Sorted Array: ");
         printArray(arr, n);
-        printCaseResult("Sorting (Best Case)", -1, executionTime);
+        printCaseResult("Sorting (Best Case)", n - 1, n - 1, executionTime);
 
         printf("\n");
 
@@ -109,7 +110,7 @@ int main() {
         executionTime = getElapsedTime(start, end, frequency);
         printf("Sorted Array: ");
         printArray(arr, n);
-        printCaseResult("Sorting (Average Case)", n / 2, executionTime);
+        printCaseResult("Sorting (Average Case)", n / 2, n / 2, executionTime);
 
         printf("\n");
 
@@ -129,7 +130,7 @@ int main() {
         executionTime = getElapsedTime(start, end, frequency);
         printf("Sorted Array: ");
         printArray(arr, n);
-        printCaseResult("Sorting (Worst Case)", -1, executionTime);
+        printCaseResult("Sorting (Worst Case)", -1, -1, executionTime);
 
         printf("\n");
 
