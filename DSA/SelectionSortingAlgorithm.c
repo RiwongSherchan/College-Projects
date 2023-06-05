@@ -31,14 +31,14 @@ double getElapsedTime(LARGE_INTEGER start, LARGE_INTEGER end, LARGE_INTEGER freq
     return ((double)(end.QuadPart - start.QuadPart) / frequency.QuadPart);
 }
 
-void printMemoryUsage(PROCESS_MEMORY_COUNTERS_EX pmc) {
-    SIZE_T virtualMemoryUsed = pmc.PrivateUsage;
-    SIZE_T peakWorkingSetSize = pmc.PeakWorkingSetSize;
+void printMemoryUsage() {
+    PROCESS_MEMORY_COUNTERS_EX pmc;
+    GetProcessMemoryInfo(GetCurrentProcess(), (PROCESS_MEMORY_COUNTERS*)&pmc, sizeof(pmc));
+    SIZE_T virtualMemoryUsed = pmc.WorkingSetSize;
     printf("Memory Usage: %llu bytes\n", (unsigned long long)virtualMemoryUsed);
-    printf("Peak Working Set Size: %llu bytes\n", (unsigned long long)peakWorkingSetSize);
 }
 
-void printCaseResult(const char* caseName, int index, double elapsedTime, PROCESS_MEMORY_COUNTERS_EX pmc) {
+void printCaseResult(const char* caseName, int index, double elapsedTime) {
     printf("%s Started\n", caseName);
     if (index != -1) {
         printf("Element found at index %d.\n", index);
@@ -46,83 +46,92 @@ void printCaseResult(const char* caseName, int index, double elapsedTime, PROCES
         printf("Element not found.\n");
     }
     printf("Time elapsed: %.0lf nanoseconds\n", elapsedTime * 1e9);
-    printMemoryUsage(pmc);
     printf("%s Ended\n\n", caseName);
+    printMemoryUsage();
+}
+
+void printArray(int arr[], int size) {
+    for (int i = 0; i < size; i++) {
+        printf("%d ", arr[i]);
+    }
+    printf("\n");
 }
 
 int main() {
     int i, j;
 
-    int sizes[] = {5000, 10000, 15000};
+    int sizes[] = {10, 20, 30};
     int numSizes = sizeof(sizes) / sizeof(sizes[0]);
 
     for (i = 0; i < numSizes; i++) {
         int n = sizes[i];
 
         int arr[n];
-        srand(time(0));
+        srand(time(0) + i);  // Use different seed for each test case
         printf("Case %d (Size: %d)\n", i + 1, n);
 
-        PROCESS_MEMORY_COUNTERS_EX pmc;
-        LARGE_INTEGER frequency, start, end;
-        QueryPerformanceFrequency(&frequency);
-
         // Best Case
-        printf("Best Case Started\n");
+        printf("Best Case:\n");
+        printf("Original Array: ");
         for (j = 0; j < n; j++) {
             arr[j] = j;
+            printf("%d ", arr[j]);
         }
-        QueryPerformanceCounter(&start);
-        selectionSortRecursive(arr, n, -1);
-        QueryPerformanceCounter(&end);
-        double executionTime = getElapsedTime(start, end, frequency);
-        GetProcessMemoryInfo(GetCurrentProcess(), (PROCESS_MEMORY_COUNTERS*)&pmc, sizeof(pmc));
-        printCaseResult("Best Case", -1, executionTime, pmc);
+        printf("\n");
 
-        // Reset variables for the next case
-        start.QuadPart = 0;
-        end.QuadPart = 0;
-        executionTime = 0;
-        ZeroMemory(&pmc, sizeof(pmc));
-        pmc.cb = sizeof(pmc);
+        // Sort the original array
+        LARGE_INTEGER start, end, frequency;
+        double executionTime;
+        QueryPerformanceFrequency(&frequency);
+        QueryPerformanceCounter(&start);
+        selectionSortRecursive(arr, n, 0);
+        QueryPerformanceCounter(&end);
+        executionTime = getElapsedTime(start, end, frequency);
+        printf("Sorted Array: ");
+        printArray(arr, n);
+        printCaseResult("Sorting (Best Case)", -1, executionTime);
+
+        printf("\n");
 
         // Average Case
-        printf("Average Case Started\n");
+        printf("Average Case:\n");
+        printf("Original Array: ");
         for (j = 0; j < n; j++) {
-            arr[j] = rand() % 100; // Generating random integers between 0 and 99
+            arr[j] = rand() % 81; // Generating random integers between 0 and 80
+            printf("%d ", arr[j]);
         }
+        printf("\n");
+
+        // Sort the original array
         QueryPerformanceCounter(&start);
         selectionSortRecursive(arr, n, n / 2);
         QueryPerformanceCounter(&end);
         executionTime = getElapsedTime(start, end, frequency);
-        GetProcessMemoryInfo(GetCurrentProcess(), (PROCESS_MEMORY_COUNTERS*)&pmc, sizeof(pmc));
-        printCaseResult("Average Case", n / 2, executionTime, pmc);
+        printf("Sorted Array: ");
+        printArray(arr, n);
+        printCaseResult("Sorting (Average Case)", n / 2, executionTime);
 
-        // Reset variables for the next case
-        start.QuadPart = 0;
-        end.QuadPart = 0;
-        executionTime = 0;
-        ZeroMemory(&pmc, sizeof(pmc));
-        pmc.cb = sizeof(pmc);
+        printf("\n");
 
         // Worst Case
-        printf("Worst Case Started\n");
+        printf("Worst Case:\n");
+        printf("Original Array: ");
         for (j = n - 1; j >= 0; j--) {
             arr[n - j - 1] = j;
+            printf("%d ", arr[n - j - 1]);
         }
+        printf("\n");
+
+        // Sort the original array
         QueryPerformanceCounter(&start);
         selectionSortRecursive(arr, n, -1);
         QueryPerformanceCounter(&end);
         executionTime = getElapsedTime(start, end, frequency);
-        GetProcessMemoryInfo(GetCurrentProcess(), (PROCESS_MEMORY_COUNTERS*)&pmc, sizeof(pmc));
-        printCaseResult("Worst Case", -1, executionTime, pmc);
+        printf("Sorted Array: ");
+        printArray(arr, n);
+        printCaseResult("Sorting (Worst Case)", -1, executionTime);
 
-        // Reset variables for the next case
-        start.QuadPart = 0;
-        end.QuadPart = 0;
-        executionTime = 0;
-        ZeroMemory(&pmc, sizeof(pmc));
-        pmc.cb = sizeof(pmc);
+        printf("\n");
 
         printf("Case %d Completed\n\n", i + 1);
     }
