@@ -5,9 +5,9 @@
 #include <psapi.h>
 
 // Function to measure time using QueryPerformanceCounter
-double measureTime(void (*func)(int[], int), int arr[], int size) {
+long long measureTime(void (*func)(int[], int), int arr[], int size) {
     LARGE_INTEGER frequency, start, end;
-    double elapsed_time;
+    long long elapsed_time;
 
     QueryPerformanceFrequency(&frequency);
     QueryPerformanceCounter(&start);
@@ -15,19 +15,25 @@ double measureTime(void (*func)(int[], int), int arr[], int size) {
     func(arr, size);
 
     QueryPerformanceCounter(&end);
-    elapsed_time = (double)(end.QuadPart - start.QuadPart) / frequency.QuadPart;
+    elapsed_time = (end.QuadPart - start.QuadPart) * 1000000000LL / frequency.QuadPart;
 
     return elapsed_time;
 }
 
 // Function to measure memory using GetProcessMemoryInfo
 void measureMemory(SIZE_T* peak_memory) {
-    HANDLE process = GetCurrentProcess();
     PROCESS_MEMORY_COUNTERS_EX pmc;
+    ZeroMemory(&pmc, sizeof(pmc));
+    pmc.cb = sizeof(pmc);
 
-    if (GetProcessMemoryInfo(process, (PROCESS_MEMORY_COUNTERS*)&pmc, sizeof(pmc))) {
-        *peak_memory = pmc.PeakWorkingSetSize;
-    }
+    GetProcessMemoryInfo(GetCurrentProcess(), (PROCESS_MEMORY_COUNTERS*)&pmc, sizeof(pmc));
+    *peak_memory = pmc.PeakWorkingSetSize;
+}
+
+void printMemoryUsage(SIZE_T peak_memory) {
+    SIZE_T virtualMemoryUsed = peak_memory;
+    printf("Memory Usage: %llu bytes\n", (unsigned long long)virtualMemoryUsed);
+    printf("Peak Working Set Size: %llu bytes\n", (unsigned long long)peak_memory);
 }
 
 void merge(int arr[], int left[], int left_size, int right[], int right_size) {
@@ -78,34 +84,74 @@ void merge_sort(int arr[], int size) {
 }
 
 int main() {
-    int size;
-    printf("Enter the size of the array: ");
-    scanf("%d", &size);
+    int sizes[] = {5000, 10000, 15000};
+     int num_sizes = sizeof(sizes) / sizeof(sizes[0]);
 
-    int arr[size];
+    LARGE_INTEGER frequency;
+    QueryPerformanceFrequency(&frequency);
 
-    // Generate random array elements
-    srand(time(0));
-    for (int i = 0; i < size; i++) {
-        arr[i] = rand() % 100; // Random elements from 0 to 99
+    for (int i = 0; i < num_sizes; i++) {
+        int size = sizes[i];
+        printf("Case %d (Size: %d)\n", i + 1, size);
+
+        int arr[size];
+        srand(time(0));
+        for (int j = 0; j < size; j++) {
+            arr[j] = rand() % 100;
+        }
+
+        // Reset variables for the next case
+        LARGE_INTEGER start, end;
+        long long executionTime = 0;
+        SIZE_T peak_memory = 0;
+
+        // Best Case
+        printf("Best Case Started\n");
+        start.QuadPart = 0;
+        end.QuadPart = 0;
+        executionTime = 0;
+        peak_memory = 0;
+
+        measureMemory(&peak_memory);
+        QueryPerformanceCounter(&start);
+        merge_sort(arr, size);
+        QueryPerformanceCounter(&end);
+        executionTime = (end.QuadPart - start.QuadPart) * 1000000000LL / frequency.QuadPart;
+        printMemoryUsage(peak_memory);
+        printf("Time elapsed: %lld nanoseconds\n", executionTime);
+
+        // Average Case
+        printf("Average Case Started\n");
+        start.QuadPart = 0;
+        end.QuadPart = 0;
+        executionTime = 0;
+        peak_memory = 0;
+
+        measureMemory(&peak_memory);
+        QueryPerformanceCounter(&start);
+        merge_sort(arr, size);
+        QueryPerformanceCounter(&end);
+        executionTime = (end.QuadPart - start.QuadPart) * 1000000000LL / frequency.QuadPart;
+        printMemoryUsage(peak_memory);
+        printf("Time elapsed: %lld nanoseconds\n", executionTime);
+
+        // Worst Case
+        printf("Worst Case Started\n");
+        start.QuadPart = 0;
+        end.QuadPart = 0;
+        executionTime = 0;
+        peak_memory = 0;
+
+        measureMemory(&peak_memory);
+        QueryPerformanceCounter(&start);
+        merge_sort(arr, size);
+        QueryPerformanceCounter(&end);
+        executionTime = (end.QuadPart - start.QuadPart) * 1000000000LL / frequency.QuadPart;
+        printMemoryUsage(peak_memory);
+        printf("Time elapsed: %lld nanoseconds\n", executionTime);
+
+        printf("Case %d Completed\n\n", i + 1);
     }
-
-    printf("Array before sorting: ");
-    for (int i = 0; i < size; i++)
-        printf("%d ", arr[i]);
-
-    double elapsed_time = measureTime(merge_sort, arr, size);
-
-    printf("\nArray after sorting: ");
-    for (int i = 0; i < size; i++)
-        printf("%d ", arr[i]);
-
-    printf("\n\nSorting Time: %f seconds\n", elapsed_time);
-
-    SIZE_T peak_memory;
-    measureMemory(&peak_memory);
-
-    printf("Peak Memory Usage: %llu bytes\n", (unsigned long long)peak_memory);
 
     return 0;
 }

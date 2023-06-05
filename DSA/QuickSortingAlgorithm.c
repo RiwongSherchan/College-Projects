@@ -32,53 +32,89 @@ void quick_sort(int arr[], int low, int high) {
     }
 }
 
-void measureTime(int arr[], int size) {
-    LARGE_INTEGER frequency, start, end;
-    double elapsedSeconds;
-
-    QueryPerformanceFrequency(&frequency);
-    QueryPerformanceCounter(&start);
-
-    quick_sort(arr, 0, size - 1);
-
-    QueryPerformanceCounter(&end);
-    elapsedSeconds = (end.QuadPart - start.QuadPart) / (double)frequency.QuadPart;
-
-    printf("Sorting time: %.6f seconds\n", elapsedSeconds);
-}
-
-void measureMemory() {
-    PROCESS_MEMORY_COUNTERS_EX pmc;
-    GetProcessMemoryInfo(GetCurrentProcess(), (PROCESS_MEMORY_COUNTERS*)&pmc, sizeof(pmc));
-
-    SIZE_T virtualMemUsedByMe = pmc.PrivateUsage;
-
-    printf("Memory used: %lu bytes\n", virtualMemUsedByMe);
+void printMemoryUsage(PROCESS_MEMORY_COUNTERS_EX pmc) {
+    SIZE_T virtualMemoryUsed = pmc.PrivateUsage;
+    SIZE_T peakWorkingSetSize = pmc.PeakWorkingSetSize;
+    printf("Memory Usage: %llu bytes\n", (unsigned long long)virtualMemoryUsed);
+    printf("Peak Working Set Size: %llu bytes\n", (unsigned long long)peakWorkingSetSize);
 }
 
 int main() {
-    int size;
-    printf("Enter the size of the array: ");
-    scanf("%d", &size);
+    int sizes[] = {5000, 10000, 15000};
+    int numSizes = sizeof(sizes) / sizeof(sizes[0]);
+    int numCases = 3; // Number of cases to test
 
-    int numbers[size];
-    srand(time(NULL));
-    printf("Generated array elements: ");
-    for (int i = 0; i < size; i++) {
-        numbers[i] = rand() % 100;  // Generates random numbers between 0 and 99
-        printf("%d ", numbers[i]);
+    LARGE_INTEGER frequency, start, end;
+    double elapsedSeconds;
+    PROCESS_MEMORY_COUNTERS_EX pmc; // Declaration of the pmc variable
+
+    for (int i = 0; i < numSizes; i++) {
+        int size = sizes[i];
+        printf("Array size: %d\n", size);
+
+        int numbers[size];
+        srand(time(NULL));
+        for (int k = 0; k < size; k++) {
+            numbers[k] = rand() % 100;  // Generates random numbers between 0 and 99
+        }
+
+        for (int j = 1; j <= numCases; j++) {
+            printf("Case %d (Size: %d)\n", j, size);
+
+            // Reset variables for the case
+            start.QuadPart = 0;
+            end.QuadPart = 0;
+            elapsedSeconds = 0;
+            ZeroMemory(&pmc, sizeof(pmc));
+            pmc.cb = sizeof(pmc);
+
+            printf("Best Case Started\n");
+            QueryPerformanceFrequency(&frequency);
+            QueryPerformanceCounter(&start);
+            quick_sort(numbers, 0, size - 1);
+            QueryPerformanceCounter(&end);
+            elapsedSeconds = (end.QuadPart - start.QuadPart) / (double)frequency.QuadPart;
+            GetProcessMemoryInfo(GetCurrentProcess(), (PROCESS_MEMORY_COUNTERS*)&pmc, sizeof(pmc));
+            printMemoryUsage(pmc);
+            printf("Time elapsed: %lld nanoseconds\n", (long long)((elapsedSeconds * 1e9)));
+
+            // Reset variables for the case
+            start.QuadPart = 0;
+            end.QuadPart = 0;
+            elapsedSeconds = 0;
+            ZeroMemory(&pmc, sizeof(pmc));
+            pmc.cb = sizeof(pmc);
+
+            printf("Average Case Started\n");
+            QueryPerformanceFrequency(&frequency);
+            QueryPerformanceCounter(&start);
+            quick_sort(numbers, 0, size - 1);
+            QueryPerformanceCounter(&end);
+            elapsedSeconds = (end.QuadPart - start.QuadPart) / (double)frequency.QuadPart;
+            GetProcessMemoryInfo(GetCurrentProcess(), (PROCESS_MEMORY_COUNTERS*)&pmc, sizeof(pmc));
+            printMemoryUsage(pmc);
+            printf("Time elapsed: %lld nanoseconds\n", (long long)((elapsedSeconds * 1e9)));
+
+            // Reset variables for the case
+            start.QuadPart = 0;
+            end.QuadPart = 0;
+            elapsedSeconds = 0;
+            ZeroMemory(&pmc, sizeof(pmc));
+            pmc.cb = sizeof(pmc);
+
+            printf("Worst Case Started\n");
+            QueryPerformanceFrequency(&frequency);
+            QueryPerformanceCounter(&start);
+            quick_sort(numbers, 0, size - 1);
+            QueryPerformanceCounter(&end);
+            elapsedSeconds = (end.QuadPart - start.QuadPart) / (double)frequency.QuadPart;
+            GetProcessMemoryInfo(GetCurrentProcess(), (PROCESS_MEMORY_COUNTERS*)&pmc, sizeof(pmc));
+            printMemoryUsage(pmc);
+            printf("Time elapsed: %lld nanoseconds\n", (long long)((elapsedSeconds * 1e9)));
+
+            printf("Case %d Completed\n\n", j);
+        }
     }
-    printf("\n");
-
-    measureTime(numbers, size);
-
-    printf("Sorted array elements: ");
-    for (int i = 0; i < size; i++) {
-        printf("%d ", numbers[i]);
-    }
-    printf("\n");
-
-    measureMemory();
 
     return 0;
 }
