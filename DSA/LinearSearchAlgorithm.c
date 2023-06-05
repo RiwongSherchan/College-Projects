@@ -5,12 +5,6 @@
 #include <time.h>
 
 // Function to perform linear search in an array
-// Arguments:
-// - arr: The array to be searched
-// - n: The size of the array
-// - target: The element to be searched for
-// Returns:
-// - The index of the target element if found, or -1 if not found
 int linearSearch(int arr[], int n, int target)
 {
     for (int i = 0; i < n; i++)
@@ -24,8 +18,6 @@ int linearSearch(int arr[], int n, int target)
 }
 
 // Function to get the current time using the Windows performance counters
-// Returns:
-// - The current time in nanoseconds
 long long getCurrentTime()
 {
     LARGE_INTEGER frequency;
@@ -41,8 +33,6 @@ long long getCurrentTime()
 }
 
 // Function to print memory usage statistics
-// Arguments:
-// - pmc: The PROCESS_MEMORY_COUNTERS_EX structure containing memory usage information
 void printMemoryUsage(PROCESS_MEMORY_COUNTERS_EX pmc)
 {
     SIZE_T virtualMemoryUsed = pmc.PrivateUsage;
@@ -51,9 +41,19 @@ void printMemoryUsage(PROCESS_MEMORY_COUNTERS_EX pmc)
     printf("Peak Working Set Size: %llu bytes\n", (unsigned long long)peakWorkingSetSize);
 }
 
+// Function to print array elements
+void printArray(int arr[], int n)
+{
+    for (int i = 0; i < n; i++)
+    {
+        printf("%d ", arr[i]);
+    }
+    printf("\n\n");
+}
+
 int main()
 {
-    int sizes[] = {5000, 10000, 15000}; // Array sizes for analysis
+    int sizes[] = {10, 20, 30}; // Array sizes for analysis
 
     for (int i = 0; i < sizeof(sizes) / sizeof(sizes[0]); i++)
     {
@@ -67,8 +67,12 @@ int main()
         srand(time(NULL));
         for (int i = 0; i < n; i++)
         {
-            arr[i] = rand() % 10000001; // Generating random numbers between 0 and 10,000,000
+            arr[i] = rand() % 81; // Generating random numbers between 0 and 80
         }
+
+        // Print array elements before linear search
+        printf("Array elements before linear search:\n");
+        printArray(arr, n);
 
         // Best Case
         printf("Best Case Started\n");
@@ -78,7 +82,8 @@ int main()
         int result = linearSearch(arr, n, target);
         long long end = getCurrentTime();
         long long executionTime = end - start;
-        // Print result and execution time
+        // Print result, target, and execution time
+        printf("Target: %d\n", target);
         if (result == -1)
         {
             printf("Element not found.\n");
@@ -96,6 +101,10 @@ int main()
         printMemoryUsage(pmc);
         printf("Best Case Ended\n\n");
 
+        // Print array elements after linear search
+        printf("Array elements after linear search:\n");
+        printArray(arr, n);
+
         // Reset variables for the next case
         start = 0;
         end = 0;
@@ -109,7 +118,8 @@ int main()
         result = linearSearch(arr, n, target);
         end = getCurrentTime();
         executionTime = end - start;
-        // Print result and execution time
+        // Print result, target, and execution time
+        printf("Target: %d\n", target);
         if (result == -1)
         {
             printf("Element not found.\n");
@@ -125,6 +135,10 @@ int main()
         printMemoryUsage(pmc);
         printf("Average Case Ended\n\n");
 
+        // Print array elements after linear search
+        printf("Array elements after linear search:\n");
+        printArray(arr, n);
+
         // Reset variables for the next case
         start = 0;
         end = 0;
@@ -138,7 +152,8 @@ int main()
         result = linearSearch(arr, n, target);
         end = getCurrentTime();
         executionTime = end - start;
-        // Print result and execution time
+        // Print result, target, and execution time
+        printf("Target: %d\n", target);
         if (result == -1)
         {
             printf("Element not found.\n");
@@ -153,6 +168,10 @@ int main()
         GetProcessMemoryInfo(process, (PROCESS_MEMORY_COUNTERS *)&pmc, sizeof(pmc));
         printMemoryUsage(pmc);
         printf("Worst Case Ended\n\n");
+
+        // Print array elements after linear search
+        printf("Array elements after linear search:\n");
+        printArray(arr, n);
 
         free(arr); // Free dynamically allocated memory
         printf("Case %d Completed\n\n", i + 1);
