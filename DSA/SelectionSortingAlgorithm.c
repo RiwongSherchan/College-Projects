@@ -4,12 +4,14 @@
 #include <windows.h>
 #include <psapi.h>
 
+// Function to swap two integers
 void swap(int *a, int *b) {
     int temp = *a;
     *a = *b;
     *b = temp;
 }
 
+// Recursive implementation of selection sort
 void selectionSortRecursive(int arr[], int n, int index) {
     if (index >= n - 1)
         return;
@@ -27,10 +29,12 @@ void selectionSortRecursive(int arr[], int n, int index) {
     selectionSortRecursive(arr, n, index + 1);
 }
 
+// Calculate the elapsed time in nanoseconds
 double getElapsedTime(LARGE_INTEGER start, LARGE_INTEGER end, LARGE_INTEGER frequency) {
     return ((double)(end.QuadPart - start.QuadPart) * 1e9 / frequency.QuadPart);
 }
 
+// Print the memory usage of the process
 void printMemoryUsage() {
     PROCESS_MEMORY_COUNTERS_EX pmc;
     GetProcessMemoryInfo(GetCurrentProcess(), (PROCESS_MEMORY_COUNTERS*)&pmc, sizeof(pmc));
@@ -38,6 +42,7 @@ void printMemoryUsage() {
     printf("Memory Usage: %llu bytes\n", (unsigned long long)virtualMemoryUsed);
 }
 
+// Print the result of each test case
 void printCaseResult(const char* caseName, int foundIndex, int expectedIndex, double elapsedTime) {
     printf("%s Started\n", caseName);
     if (foundIndex != -1) {
@@ -51,6 +56,7 @@ void printCaseResult(const char* caseName, int foundIndex, int expectedIndex, do
     printMemoryUsage();
 }
 
+// Print the elements of an array
 void printArray(int arr[], int size) {
     for (int i = 0; i < size; i++) {
         printf("%d ", arr[i]);
