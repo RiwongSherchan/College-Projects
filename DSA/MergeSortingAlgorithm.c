@@ -107,7 +107,7 @@ void merge_sort(int arr[], int size) {
     // Merge the sorted subarrays
     merge(arr, left, mid, right, size - mid);
 }
-
+ 
 int main() {
     int sizes[] = {10, 25, 60};
     int num_sizes = sizeof(sizes) / sizeof(sizes[0]);

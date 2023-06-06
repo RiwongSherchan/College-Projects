@@ -137,7 +137,7 @@ int main() {
         printf("Sorted Array: ");
         printArray(arr, n);
         printCaseResult("Sorting (Worst Case)", -1, -1, executionTime);
-
+  
         printf("\n");
     
         printf("Case %d Completed\n\n", i + 1);
