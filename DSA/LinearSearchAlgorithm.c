@@ -50,7 +50,7 @@ void printArray(int arr[], int n)
     }
     printf("\n\n");
 }
- 
+     
 int main()
 {
     int sizes[] = {10, 20, 30}; // Array sizes for analysis

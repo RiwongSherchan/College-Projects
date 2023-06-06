@@ -139,9 +139,9 @@ int main() {
         printCaseResult("Sorting (Worst Case)", -1, -1, executionTime);
 
         printf("\n");
-
+    
         printf("Case %d Completed\n\n", i + 1);
-    }
+    }  
  
     return 0;
 }

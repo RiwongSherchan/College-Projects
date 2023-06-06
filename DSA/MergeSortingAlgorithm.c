@@ -99,7 +99,7 @@ void merge_sort(int arr[], int size) {
         left[i] = arr[i];
     for (int i = mid; i < size; i++)
         right[i - mid] = arr[i];
-
+   
     // Recursively sort the left and right subarrays
     merge_sort(left, mid);
     merge_sort(right, size - mid);
