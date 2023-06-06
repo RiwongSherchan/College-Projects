@@ -2,6 +2,8 @@
 
 Branches :
 
+BlankBranch : just a blank branch with no files.(for making new empty branches)
+
 DSA : Data Stuctures and Algorithms.
 
 SE : Software Engineering.
