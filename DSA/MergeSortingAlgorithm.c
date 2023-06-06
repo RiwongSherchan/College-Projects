@@ -141,7 +141,7 @@ int main() {
         QueryPerformanceFrequency(&frequency);
 
         // Best Case
-        printf("Best Case Started\n");
+        printf("\nBest Case Started\n");
         // Measure the memory usage before sorting
         measureMemory(&peak_memory);
         // Get the starting time
@@ -164,7 +164,7 @@ int main() {
         printf("\n");
 
         // Average Case
-        printf("Average Case Started\n");
+        printf("\nAverage Case Started\n");
         // Measure the memory usage before sorting
         measureMemory(&peak_memory);
         // Get the starting time
@@ -187,7 +187,7 @@ int main() {
         printf("\n");
 
         // Worst Case
-        printf("Worst Case Started\n");
+        printf("\nWorst Case Started\n");
         // Measure the memory usage before sorting
         measureMemory(&peak_memory);
         // Get the starting time
