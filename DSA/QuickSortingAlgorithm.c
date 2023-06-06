@@ -130,7 +130,7 @@ int main()
 
             printf("Sorted Array: ");
             printArray(numbers, size);
-
+ 
             printf("\nCase %d Completed\n\n", caseNumber);
         }
     }

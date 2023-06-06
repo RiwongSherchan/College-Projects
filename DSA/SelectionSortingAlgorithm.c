@@ -142,6 +142,6 @@ int main() {
 
         printf("Case %d Completed\n\n", i + 1);
     }
-
+ 
     return 0;
 }

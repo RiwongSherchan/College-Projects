@@ -17,7 +17,7 @@ void insertion_sort(int arr[], int size) {
         }
 
         arr[j + 1] = key;
-    }
+    } 
 }
 
 // Function to perform interpolation search on a sorted array
