@@ -21,7 +21,6 @@
           <option value="doctor">Doctor</option>
           <option value="Healthcare">Healthcare</option>
           <option value="pharmacy">Pharmacy</option>
-          <option value="Department">Department</option>
           <option value="admin">Admin</option>
         </select>
         <input type="email" name="email" placeholder="Email" required>
@@ -46,16 +45,14 @@
       if (userType === "patient") {
         window.location.href = "patient-dashboard.html";
       } else if (userType === "doctor") {
-        window.location.href = "doctor.html";
+        window.location.href = "doctor-dashboard.html";
       } else if (userType === "Healthcare") {
         window.location.href = "healthcare-dashboard.html";
       } else if (userType === "pharmacy") {
-        window.location.href = "pharmacy.html";
-      }else if (userType === "Department") {
-        window.location.href = "department-dashboard.html";
-      } 
+        window.location.href = "pharmacy-dashboard.html";
+      }
        else if (userType === "admin") {
-        window.location.href = "admin.html";
+        window.location.href = "admin-dashboard.html";
       }
     });
   </script>
