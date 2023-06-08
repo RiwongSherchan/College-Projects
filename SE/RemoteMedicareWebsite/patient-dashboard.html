@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Patient Dashboard</title>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+        <link rel="stylesheet" type="text/css" href="patient-dashboard.css">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hospital-backgrounds@1.0.0/dist/hospital-backgrounds.min.css">
+      </head>
+<body>
+  <header class="bg-primary text-white py-3">
+    <div class="container-fluid">
+      <div class="row align-items-center">
+        <div class="col-lg-8">
+          <h1 class="text-center">Patient Dashboard</h1>
+        </div>
+        <div class="col-lg-4 d-flex justify-content-end">
+          <div class="user-settings mr-3">
+            <a href="#"><i class="fas fa-cog"></i></a>
+          </div>
+          <div class="notifications">
+            <a href="#"><i class="fas fa-bell"></i></a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-lg-3 bg-dark text-white side-nav">
+        <ul class="list-unstyled">
+          <li><a href="#"><i class="fas fa-file-medical mr-2"></i>Medical Records</a></li>
+          <li><a href="#"><i class="fas fa-prescription-bottle mr-2"></i>Pharmacies</a></li>
+          <li><a href="#"><i class="fas fa-pills mr-2"></i>Buy Medicine</a></li>
+          <li><a href="#"><i class="fas fa-hospital mr-2"></i>Healthcare Providers</a></li>
+          <li><a href="#"><i class="fas fa-calendar-alt mr-2"></i>List of Appointments</a></li>
+          <li><a href="#"><i class="fas fa-history mr-2"></i>History</a></li>
+          <li><a href="#"><i class="fas fa-heartbeat mr-2"></i>Remote Monitor</a></li>
+          <li><a href="#"><i class="fas fa-money-check-alt mr-2"></i>Payment Settings</a></li>
+        </ul>
+      </div>
+
+      <div class="col-lg-9">
+        <div class="search-container mt-4">
+          <input type="text" class="form-control" placeholder="Search">
+          <button class="btn btn-primary ml-2">Search</button>
+        </div>
+
+        <div class="doctor-list mt-4">
+          <div class="doctor-item">
+            <h3>Dr. ronik mayalulal</h3>
+            <p>Specialty: Cardiology</p>
+            <p>Ratings: &#9733;&#9733;&#9733;&#9733;&#9734;</p>
+            <p>Healthcare: ABC Hospital</p>
+            <button class="btn btn-primary virtual-appointment-button">Virtual Appointment</button>
+          </div>
+          <div class="doctor-item">
+            <h3>Dr. wong shyamsung</h3>
+            <p>Specialty: Dermatology</p>
+            <p>Ratings: &#9733;&#9733;&#9733;&#9733;&#9733;</p>
+            <p>Healthcare: XYZ Clinic</p>
+            <button class="btn btn-primary virtual-appointment-button">Virtual Appointment</button>
+          </div>
+          <!-- Repeat doctor-item div for each doctor -->
+          <div class="doctor-item">
+            <h3>Dr. Rohan lal bhatta</h3>
+            <p>Specialty: Pediatrics</p>
+            <p>Ratings: &#9733;&#9733;&#9733;&#9733;&#9733;</p>
+            <p>Healthcare: 123 Medical Center</p>
+            <button class="btn btn-primary virtual-appointment-button">Virtual Appointment</button>
+          </div>
+          <div class="doctor-item">
+            <h3>Dr. manoj chandra mann</h3>
+            <p>Specialty: Neurology</p>
+            <p>Ratings: &#9733;&#9733;&#9733;&#9733;&#9734;</p>
+            <p>Healthcare: City Hospital</p>
+            <button class="btn btn-primary virtual-appointment-button">Virtual Appointment</button>
+          </div>
+          <div class="doctor-item">
+            <h3>Dr. saugat jackson</h3>
+            <p>Specialty: Heart</p>
+            <p>Ratings: &#9733;&#9733;&#9733;&#9733;&#9734;</p>
+            <p>Healthcare: City Hospital</p>
+            <button class="btn btn-primary virtual-appointment-button">Virtual Appointment</button>
+          </div>
+          <!-- Repeat for the remaining doctors -->
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+</body>
+</html>
