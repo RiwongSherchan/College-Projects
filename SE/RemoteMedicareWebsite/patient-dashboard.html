@@ -30,7 +30,7 @@
       <div class="row">
         <div class="col-lg-3 bg-dark text-white side-nav">
           <ul class="list-unstyled">
-            <li><a href="MedicalRecord-dashboard.css"><i class="fas fa-file-medical mr-2"></i>Medical Records</a></li>
+            <li><a href="MedicalRecord-dashboard.html"><i class="fas fa-file-medical mr-2"></i>Medical Records</a></li>
             <li><a href="medicine-dashboard.html"><i class="fas fa-prescription-bottle mr-2"></i>Medicine Shop</a></li>
             <li><a href="appoitment-dashboard.html"><i class="fas fa-calendar-alt mr-2"></i>Appointments</a></li>
             <li><a href="remote-monitoring-dashboard.html"><i class="fas fa-heartbeat mr-2"></i>Remote Monitor</a></li>
@@ -43,16 +43,51 @@
             <button class="btn btn-primary ml-2">Search</button>
           </div>
 
-          <div class="doctor-list mt-4">
-            <div class="doctor-item">
-              <h3>Dr. ronik hasthalal Kumar</h3>
-              <p>Specialty: Cardiology</p>
-              <p>Ratings: &#9733;&#9733;&#9733;&#9733;&#9734;</p>
-              <p>Healthcare: ABC Hospital</p>
-              <button class="btn btn-primary virtual-appointment-button" onclick="showAppointmentPopup('scheduled')">Virtual Appointment</button>
+          
+            <div class="doctor-list mt-4">
+              <div class="doctor-item">
+                <h3>Dr. ronik hasthalal Kumar</h3>
+                <p>Specialty: Cardiology</p>
+                <p>Ratings: &#9733;&#9733;&#9733;&#9733;&#9734;</p>
+                <p>Healthcare: ABC Hospital</p>
+                <button class="btn btn-primary virtual-appointment-button" onclick="showAppointmentPopup('scheduled')">Virtual Appointment</button>
               <button class="btn btn-primary virtual-appointment-button" onclick="showAppointmentPopup('emergency')">Emergency Appointment</button>
-            </div>
-            <!-- Repeat for the remaining doctors -->
+              </div>
+              <div class="doctor-item">
+                <h3>Dr. wong shyamsung</h3>
+                <p>Specialty: Dermatology</p>
+                <p>Ratings: &#9733;&#9733;&#9733;&#9733;&#9733;</p>
+                <p>Healthcare: XYZ Clinic</p>
+                <button class="btn btn-primary virtual-appointment-button" onclick="showAppointmentPopup('scheduled')">Virtual Appointment</button>
+              <button class="btn btn-primary virtual-appointment-button" onclick="showAppointmentPopup('emergency')">Emergency Appointment</button>
+              </div>
+              <!-- Repeat doctor-item div for each doctor -->
+              <div class="doctor-item">
+                <h3>Dr. Rohan jins
+                </h3>
+                <p>Specialty: Stomach and Digestive system</p>
+                <p>Ratings: &#9733;&#9733;&#9733;&#9733;&#9733;</p>
+                <p>Healthcare: 123 Medical Center</p>
+                <button class="btn btn-primary virtual-appointment-button" onclick="showAppointmentPopup('scheduled')">Virtual Appointment</button>
+              <button class="btn btn-primary virtual-appointment-button" onclick="showAppointmentPopup('emergency')">Emergency Appointment</button>
+              </div>
+              <div class="doctor-item">
+                <h3>Dr. manoj chandra mann</h3>
+                <p>Specialty: Neurology</p>
+                <p>Ratings: &#9733;&#9733;&#9733;&#9733;&#9734;</p>
+                <p>Healthcare: City Hospital</p>
+                <button class="btn btn-primary virtual-appointment-button" onclick="showAppointmentPopup('scheduled')">Virtual Appointment</button>
+              <button class="btn btn-primary virtual-appointment-button" onclick="showAppointmentPopup('emergency')">Emergency Appointment</button>
+              </div>
+              <div class="doctor-item">
+                <h3>Dr. saugat jackson</h3>
+                <p>Specialty: Heart</p>
+                <p>Ratings: &#9733;&#9733;&#9733;&#9733;&#9734;</p>
+                <p>Healthcare: City Hospital</p>
+                <button class="btn btn-primary virtual-appointment-button" onclick="showAppointmentPopup('scheduled')">Virtual Appointment</button>
+              <button class="btn btn-primary virtual-appointment-button" onclick="showAppointmentPopup('emergency')">Emergency Appointment</button>
+              </div>
+              <!-- Repeat for the remaining doctors -->
           </div>
         </div>
       </div>
