@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- ResultDisplay.fxml -->
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.VBox?>
+
+<VBox prefHeight="200.0" prefWidth="300.0"
+	xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1"
+	fx:controller="application.controller.ResultDisplayController">
+	<children>
+		<Label fx:id="firstNameLabel" />
+		<Label fx:id="genderLabel" />
+		<Label fx:id="countryLabel" />
+		<Label fx:id="resultLabel" />
+		<Button fx:id="returnButton" text="Return to Dashboard"
+			onAction="#returnButtonClicked" />
+	</children>
+</VBox>

@@ -80,13 +80,36 @@ public class CandidateRegistrationController {
 		Stage stage = (Stage) registerButton.getScene().getWindow();
 		stage.close();
 
-		openCandidateDashboard();
+		openCandidateDashboard(NewCandidate);
 	}
 
-	private void openCandidateDashboard() {
-		SceneLoader.loadScene("/application/fxml/CandidateDashboard.fxml", "Candidate Dashboard");
+	private void openCandidateDashboard(Candidate candidate) {
+
+		System.out.println("check 1");
+		FXMLLoader loader = new FXMLLoader(getClass().getResource("/application/fxml/CandidateDashboard.fxml"));
+		System.out.println("check 3");
+		Parent root = null;
+		try {
+			root = loader.load();
+			System.out.println("check 4");
+			// Get the controller instance and initialize it if needed
+			CandidateDashboardController controller = loader.getController();
+			controller.setCandidate(candidate);
+			controller.initialize(); // You can modify this method name as per your need
+			System.out.println("check 2 CDC");
+			Stage stage = new Stage();
+			stage.setTitle("Masathai Exam");
+			stage.setScene(new Scene(root));
+			stage.show();
+
+			// Close the current stage if needed
+
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 
 	}
+
 
 	private void saveToTextFile(String firstName, String lastName, String email, String gender, String country,
 			String contactNumber) {
