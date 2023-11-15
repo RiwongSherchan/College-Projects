@@ -13,7 +13,9 @@ import javafx.scene.control.ToggleGroup;
 import javafx.stage.Stage;
 
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -179,7 +181,7 @@ public class ExaminationFormController {
 	private void submitButtonClicked() {
 		// Calculate the score
 		int score = 0;
-		int totalQuestions = Math.min(selectedOptions.size(), correctAnswers.size());
+		int totalQuestions = currentQuestionIndex;
 
 		for (int i = 0; i < totalQuestions; i++) {
 			String userAnswer = selectedOptions.get(i);
@@ -190,17 +192,32 @@ public class ExaminationFormController {
 			}
 		}
 
-		String result = calculateResult(); // Implement your logic here
+		// Calculate percentage
+		double percentage = (double) score / totalQuestions * 100;
+
+		// Calculate total correct out of total questions
+		String result = String.format("You scored %d out of %d. Your percentage is %.2f%%", score, totalQuestions,
+				percentage);
 
 		// Pass the result to the ResultDisplayController
-		
 
 		// Print or process the user's score
 		System.out.println("User's Score: " + score);
-		
+		saveTestResult(candidate.getEmail(), score);
+
 		openResultDisplay(result);
 
 		// You can add further logic for processing the submitted answers
+	}
+	
+	private void saveTestResult(String userEmail, int score) {
+	    try (BufferedWriter writer = new BufferedWriter(new FileWriter("test_result.txt", true))) {
+	        // Append the details in comma-separated format
+	        writer.write(userEmail + "," + score + "\n");
+	        System.out.println("Test result saved to test_result.txt");
+	    } catch (IOException e) {
+	        e.printStackTrace();
+	    }
 	}
 
 	private void loadCorrectAnswers() {
@@ -251,11 +268,6 @@ public class ExaminationFormController {
 
 	// Existing code...
 
-	private String calculateResult() {
-		// Implement your logic to calculate the result
-		// You can use information from the examination and candidate
-		// For demonstration purposes, returning a dummy result
-		return "Pass"; // Replace with your actual result calculation
-	}
+
 
 }
