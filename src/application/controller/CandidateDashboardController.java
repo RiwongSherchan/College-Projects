@@ -26,6 +26,9 @@ public class CandidateDashboardController {
 	
 	@FXML
 	private Button openExamination;
+	
+	@FXML
+	private Button LogoutButton;
 
 	private Candidate candidate;
 
@@ -93,6 +96,27 @@ public class CandidateDashboardController {
 	// Method to handle the "Logout" button click
 	@FXML
 	private void logout(ActionEvent event) {
-		// Implement logic to logout (e.g., return to the login scene)
+		FXMLLoader loader = new FXMLLoader(getClass().getResource("/application/fxml/home.fxml"));
+
+		Parent root = null;
+		try {
+			root = loader.load();
+
+			// Get the controller instance and initialize it if needed
+			HomeController controller = loader.getController();
+			// controller.initialize(); // You can modify this method name as per your need
+			Stage CloseCurrentStage = (Stage) LogoutButton.getScene().getWindow();
+			CloseCurrentStage.close();
+			Stage stage = new Stage();
+			stage.setTitle("home");
+			stage.setScene(new Scene(root));
+			stage.show();
+
+			// Close the current stage if needed
+
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		
 	}
 }

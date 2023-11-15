@@ -7,18 +7,12 @@ public class Candidate {
     private String email;
     private String gender;
     private String country;
+    private String password;
     private String contactNumber;
 
     // Constructors, getters, and setters
 
-    public Candidate(String firstName, String lastName, String email, String gender, String country, String contactNumber) {
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.email = email;
-        this.gender = gender;
-        this.country = country;
-        this.contactNumber = contactNumber;
-    }
+ 
 
     // Getters and setters for each attribute
 
@@ -26,7 +20,27 @@ public class Candidate {
         return firstName;
     }
 
-    public void setFirstName(String firstName) {
+    public Candidate(String firstName, String lastName, String email, String gender, String country, String password,
+			String contactNumber) {
+		super();
+		this.firstName = firstName;
+		this.lastName = lastName;
+		this.email = email;
+		this.gender = gender;
+		this.country = country;
+		this.password = password;
+		this.contactNumber = contactNumber;
+	}
+
+	public String getPassword() {
+		return password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
+	}
+
+	public void setFirstName(String firstName) {
         this.firstName = firstName;
     }
 

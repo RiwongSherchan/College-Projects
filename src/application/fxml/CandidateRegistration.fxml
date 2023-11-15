@@ -35,9 +35,14 @@
 		mnemonicParsing="false" text="Malaysia" />
 	<RadioButton fx:id="singaporeRadioButton"
 		mnemonicParsing="false" text="Singapore" />
+	<Label text="Password" />
+	<TextField fx:id="passwordField" />
 	<Label text="Contact Number" />
 	<TextField fx:id="contactNumberField" />
 	<Button fx:id="registerButton" mnemonicParsing="false"
 		text="Register" onAction="#registerButtonClicked" />
+
+	<Button fx:id="CancelButton" text="Cancel"
+		onAction="#cancelButtonClicked" />
 
 </VBox>

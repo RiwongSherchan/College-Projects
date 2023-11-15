@@ -29,5 +29,5 @@
 	<Button fx:id="openExamination" onAction="#openExamination" text="Examination" />
 	<Button onAction="#openProfileSettings" text="Profile Settings" />
 	<Button onAction="#openTestResults" text="Test Results" />
-	<Button onAction="#logout" text="Logout" />
+	<Button fx:id="LogoutButton" onAction="#logout" text="Logout" />
 </VBox>
