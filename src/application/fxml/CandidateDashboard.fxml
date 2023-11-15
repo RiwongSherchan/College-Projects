@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<VBox prefHeight="306.0" prefWidth="297.0" stylesheets="/application/styles/main.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.controller.CandidateDashboardController">
+    <padding>
+        <Insets bottom="10" left="10" right="10" top="10" />
+    </padding>
+
+    <Label text="Candidate Dashboard">
+        <font>
+            <javafx.scene.text.Font size="20" />
+        </font>
+    </Label>
+
+    <!-- Display Candidate Details -->
+    <Label fx:id="candidateDetailsLabel" />
+    
+    <!-- Buttons for Examination, Profile Settings, and Test Results -->
+    <Button onAction="#openExamination" text="Examination" />
+    <Button onAction="#openProfileSettings" text="Profile Settings" />
+    <Button onAction="#openTestResults" text="Test Results" />
+     <Button onAction="#logout" text="Logout" />
+</VBox>

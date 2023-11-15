@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.geometry.*?>
+
+<BorderPane fx:controller="application.controller.HomeController"
+            xmlns:fx="http://javafx.com/fxml"
+            styleClass="mainFxmlClass"
+            stylesheets="/application/styles/UserRegistration.css">
+
+    <center>
+        <VBox spacing="10" alignment="CENTER">
+            <Label text="Welcome to Masathai Citizenship Assessment"/>
+            <Label text="Choose an option below:"/>
+            <Button text="Admin Login" onAction="#adminLogin"/>
+            <Button text="User Registration" onAction="#userRegistration"/>
+            <Button text="User Login" onAction="#userLogin"/>
+        </VBox>
+    </center>
+
+</BorderPane>
