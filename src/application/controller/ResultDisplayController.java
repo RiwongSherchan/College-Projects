@@ -5,11 +5,14 @@ package application.controller;
 import java.io.IOException;
 
 import application.model.Candidate;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.chart.PieChart;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.stage.Stage;
@@ -31,6 +34,9 @@ public class ResultDisplayController {
 
 	@FXML
 	private Label countryLabel;
+	
+	 @FXML
+	    private PieChart pieChart;
     
     
 	private Candidate candidate;
@@ -40,6 +46,8 @@ public class ResultDisplayController {
 	}
 
     private String result;
+    
+    private int score;
 
     public void initialize() {
     	
@@ -48,6 +56,7 @@ public class ResultDisplayController {
 			genderLabel.setText("Gender: " + candidate.getGender());
 			countryLabel.setText("Country: " + candidate.getCountry());
 		}
+    	 updatePieChart();
         // Set the resultLabel text with the result
         resultLabel.setText(result);
     }
@@ -55,6 +64,26 @@ public class ResultDisplayController {
     public void setResult(String result) {
         this.result = result;
     }
+    
+    public void setscore(int score) {
+        this.score = score;
+    }
+    
+    private void updatePieChart() {
+        // Extract correct answers and total questions from the result
+        int correctAnswers = score;
+        int totalQuestions = 20;
+
+        // Create pie chart data
+        ObservableList<PieChart.Data> pieChartData = FXCollections.observableArrayList(
+                new PieChart.Data("Correct Answers", correctAnswers),
+                new PieChart.Data("Incorrect Answers", totalQuestions - correctAnswers)
+        );
+
+        // Set the pie chart data
+        pieChart.setData(pieChartData);
+    }
+
 
     @FXML
     private void returnButtonClicked(ActionEvent event) {

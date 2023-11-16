@@ -22,6 +22,12 @@ import java.io.InputStreamReader;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
+import javafx.util.Duration;
+
 
 import application.model.Candidate;
 
@@ -71,11 +77,16 @@ public class ExaminationFormController {
 
 	@FXML
 	private Label resultLabel;
+	
+	@FXML
+	private Label currentQuestionLabel;
 
 	private List<String> selectedOptions = new ArrayList<>();
 	private List<String> questionsWithOptions = new ArrayList<>();
 	private List<String> correctAnswers = new ArrayList<>();
 	private int currentQuestionIndex = 0;
+	private int secondsRemaining = 300; // 5 minutes
+	private Timeline timer;
 
 	private Candidate candidate;
 
@@ -87,6 +98,8 @@ public class ExaminationFormController {
 		loadQuestionsWithOptions();
 		updateQuestion();
 		loadCorrectAnswers();
+		initializeTimer();
+		 updateCurrentQuestionLabel();
 
 		if (candidate != null) {
 			firstNameLabel.setText("First Name: " + candidate.getFirstName());
@@ -103,6 +116,41 @@ public class ExaminationFormController {
 		// Initially, set the Submit button to be invisible
 		submitButton.setVisible(false);
 
+	}
+	
+	private void updateCurrentQuestionLabel() {
+	    currentQuestionLabel.setText("Current Question: " + (currentQuestionIndex + 1));
+	}
+	
+	private void initializeTimer() {
+	    timer = new Timeline(
+	            new KeyFrame(Duration.seconds(1), new EventHandler<ActionEvent>() {
+	                @Override
+	                public void handle(ActionEvent event) {
+	                    updateTimerLabel();
+	                    if (secondsRemaining <= 0) {
+	                        timer.stop();
+	                        handleTimerFinish();
+	                    } else {
+	                        secondsRemaining--;
+	                    }
+	                }
+	            })
+	    );
+
+	    timer.setCycleCount(Timeline.INDEFINITE);
+	    timer.play();
+	}
+
+	private void updateTimerLabel() {
+	    int minutes = secondsRemaining / 60;
+	    int seconds = secondsRemaining % 60;
+	    timerLabel.setText(String.format("Time Remaining: %02d:%02d", minutes, seconds));
+	}
+
+	private void handleTimerFinish() {
+	    // Perform actions when the timer finishes (e.g., submit the form)
+	    submitButtonClicked();
 	}
 
 	private void loadQuestionsWithOptions() {
@@ -157,6 +205,7 @@ public class ExaminationFormController {
 		}
 
 		updateQuestion();
+		 updateCurrentQuestionLabel();
 	}
 
 	@FXML
@@ -169,6 +218,7 @@ public class ExaminationFormController {
 			nextButton.setDisable(false);
 
 			updateQuestion();
+			 updateCurrentQuestionLabel();
 
 			// Remove the last selected option when going back
 			if (!selectedOptions.isEmpty()) {
@@ -203,22 +253,24 @@ public class ExaminationFormController {
 
 		// Print or process the user's score
 		System.out.println("User's Score: " + score);
-		saveTestResult(candidate.getEmail(), score);
+		saveTestResult(candidate.getEmail(), score, selectedOptions);
+		timer.stop();
 
-		openResultDisplay(result);
+		openResultDisplay(result,score);
 
 		// You can add further logic for processing the submitted answers
 	}
 	
-	private void saveTestResult(String userEmail, int score) {
+	private void saveTestResult(String userEmail, int score, List<String> selectedOptions) {
 	    try (BufferedWriter writer = new BufferedWriter(new FileWriter("test_result.txt", true))) {
 	        // Append the details in comma-separated format
-	        writer.write(userEmail + "," + score + "\n");
+	        writer.write(userEmail + "," + score + "," + String.join(",", selectedOptions) + "\n");
 	        System.out.println("Test result saved to test_result.txt");
 	    } catch (IOException e) {
 	        e.printStackTrace();
 	    }
 	}
+
 
 	private void loadCorrectAnswers() {
 		try {
@@ -236,7 +288,7 @@ public class ExaminationFormController {
 		}
 	}
 
-	private void openResultDisplay(String result) {
+	private void openResultDisplay(String result, int score) {
 		try {
 			FXMLLoader loader = new FXMLLoader(getClass().getResource("/application/fxml/ResultDisplay.fxml"));
 			Parent root = loader.load();
@@ -247,6 +299,7 @@ public class ExaminationFormController {
 			// Pass the result to the controller
 			controller.setResult(result);
 			controller.setCandidate(candidate);
+			controller.setscore(score);
 
 			// Initialize the controller
 			controller.initialize();

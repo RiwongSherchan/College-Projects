@@ -1,0 +1,48 @@
+/* ExaminationForm.css */
+
+/* Apply styles to the entire AnchorPane */
+.anchor-pane {
+    -fx-background-color: #f0f8ff; /* Light Blue background color */
+}
+
+/* Apply styles to Labels */
+.label {
+    -fx-font-size: 14px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #2e4a66; /* Dark Blue text color */
+}
+
+/* Apply styles to RadioButton */
+.radio-button {
+    -fx-font-size: 14px;
+    -fx-text-fill: #2e4a66; /* Dark Blue text color */
+}
+
+/* Apply styles to Buttons */
+.button {
+    -fx-font-size: 14px;
+    -fx-font-weight: bold;
+    -fx-background-color: #2e4a66; /* Dark Blue background color */
+    -fx-text-fill: #ffffff; /* White text color */
+}
+
+/* Apply styles to TimerLabel */
+#timerLabel {
+    -fx-font-size: 18px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #ff4500; /* Orange-Red text color */
+}
+
+/* Apply styles to CurrentQuestionLabel */
+#currentQuestionLabel {
+    -fx-font-size: 16px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #008000; /* Green text color */
+}
+
+/* Apply styles to the Examination Form title */
+.anchor-pane > .label {
+    -fx-font-size: 24px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #2e4a66; /* Dark Blue text color */
+}

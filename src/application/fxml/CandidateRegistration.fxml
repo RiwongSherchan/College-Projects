@@ -5,44 +5,74 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.RadioButton?>
 <?import javafx.scene.control.TextField?>
-<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.text.Font?>
 
-<VBox xmlns="http://javafx.com/javafx"
-	xmlns:fx="http://javafx.com/fxml"
-	fx:controller="application.controller.CandidateRegistrationController"
-	stylesheets="/application/styles/main.css">
-	<padding>
-		<Insets bottom="10" left="10" right="10" top="10" />
-	</padding>
 
-	<Label text="Candidate Registration" />
-	<Label text="First Name" />
-	<TextField fx:id="firstNameField" />
-	<Label text="Last Name" />
-	<TextField fx:id="lastNameField" />
-	<Label text="Email" />
-	<TextField fx:id="emailField" />
-	<Label text="Gender" />
-	<RadioButton fx:id="maleRadioButton"
-		mnemonicParsing="false" text="male" />
-	<RadioButton fx:id="femaleRadioButton"
-		mnemonicParsing="false" text="Female" />
-
-	<Label text="Country" />
-	<RadioButton fx:id="thailandRadioButton"
-		mnemonicParsing="false" text="Thailand" />
-	<RadioButton fx:id="malaysiaRadioButton"
-		mnemonicParsing="false" text="Malaysia" />
-	<RadioButton fx:id="singaporeRadioButton"
-		mnemonicParsing="false" text="Singapore" />
-	<Label text="Password" />
-	<TextField fx:id="passwordField" />
-	<Label text="Contact Number" />
-	<TextField fx:id="contactNumberField" />
-	<Button fx:id="registerButton" mnemonicParsing="false"
-		text="Register" onAction="#registerButtonClicked" />
-
-	<Button fx:id="CancelButton" text="Cancel"
-		onAction="#cancelButtonClicked" />
-
-</VBox>
+<AnchorPane xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.controller.CandidateRegistrationController">
+   <children>
+      <GridPane styleClass="grid-container" stylesheets="@../resources/styles/candidateRegistration.css">
+          <padding>
+              <Insets bottom="10" left="10" right="10" top="10" />
+          </padding>
+          <Label styleClass="label" text="First Name" GridPane.rowIndex="4" />
+          <TextField fx:id="firstNameField" styleClass="text-field" GridPane.columnIndex="2" GridPane.rowIndex="4" />
+      
+          <Label styleClass="label" text="Last Name" GridPane.rowIndex="6" />
+          <TextField fx:id="lastNameField" styleClass="text-field" GridPane.columnIndex="2" GridPane.rowIndex="6" />
+      
+          <Label styleClass="label" text="Email" GridPane.rowIndex="7" />
+          <TextField fx:id="emailField" styleClass="text-field" GridPane.columnIndex="2" GridPane.rowIndex="7" />
+      
+          <Label styleClass="label" text="Gender" GridPane.rowIndex="8" />
+          <RadioButton fx:id="maleRadioButton" mnemonicParsing="false" styleClass="radio-button" text="male" GridPane.columnIndex="2" GridPane.rowIndex="8" />
+          <RadioButton fx:id="femaleRadioButton" mnemonicParsing="false" styleClass="radio-button" text="Female" GridPane.columnIndex="2" GridPane.rowIndex="9" />
+      
+          <Label styleClass="label" text="Country" GridPane.rowIndex="10" />
+          <RadioButton fx:id="thailandRadioButton" mnemonicParsing="false" styleClass="radio-button" text="Thailand" textFill="#360a20" GridPane.columnIndex="2" GridPane.rowIndex="10" />
+          <RadioButton fx:id="malaysiaRadioButton" mnemonicParsing="false" styleClass="radio-button" text="Malaysia" GridPane.columnIndex="2" GridPane.rowIndex="11" />
+          <RadioButton fx:id="singaporeRadioButton" mnemonicParsing="false" styleClass="radio-button" text="Singapore" GridPane.columnIndex="2" GridPane.rowIndex="12" />
+      
+          <Label styleClass="label" text="Password" GridPane.rowIndex="13" />
+          <TextField fx:id="passwordField" styleClass="text-field" GridPane.columnIndex="2" GridPane.rowIndex="13" />
+      
+          <Label styleClass="label" text="Contact Number" GridPane.rowIndex="14" />
+          <TextField fx:id="contactNumberField" styleClass="text-field" GridPane.columnIndex="2" GridPane.rowIndex="14" />
+      
+          <Button fx:id="registerButton" mnemonicParsing="false" onAction="#registerButtonClicked" styleClass="button" text="Register" GridPane.rowIndex="15" />
+      
+          <Button fx:id="CancelButton" onAction="#cancelButtonClicked" styleClass="button" text="Cancel" GridPane.columnIndex="2" GridPane.rowIndex="15" />
+         <columnConstraints>
+            <ColumnConstraints />
+            <ColumnConstraints maxWidth="0.0" minWidth="0.0" prefWidth="0.0" />
+            <ColumnConstraints maxWidth="160.0" minWidth="160.0" prefWidth="160.0" />
+         </columnConstraints>
+         <rowConstraints>
+            <RowConstraints />
+            <RowConstraints />
+            <RowConstraints />
+            <RowConstraints />
+            <RowConstraints />
+            <RowConstraints />
+            <RowConstraints />
+            <RowConstraints />
+            <RowConstraints />
+            <RowConstraints />
+            <RowConstraints />
+            <RowConstraints />
+            <RowConstraints />
+            <RowConstraints />
+            <RowConstraints />
+            <RowConstraints />
+         </rowConstraints>
+      </GridPane>
+   <Label prefHeight="34.0" prefWidth="348.0" styleClass="title" text="                      Registration Form">
+         <font>
+            <Font name="Baskerville Old Face" size="18.0" />
+         </font>
+      </Label>
+   </children>
+</AnchorPane>

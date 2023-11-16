@@ -20,10 +20,11 @@ public class HomeController {
 
 			CandidateRegistrationController controller = loader.getController();
 
-			Scene scene = new Scene(root, 600, 400);
+			Scene scene = new Scene(root);
+			
 
 			Stage stage = (Stage) ((javafx.scene.Node) event.getSource()).getScene().getWindow();
-
+             stage.setMaximized(true);
 			stage.setScene(scene);
 			stage.setTitle("Candidate Registration");
 			stage.show();

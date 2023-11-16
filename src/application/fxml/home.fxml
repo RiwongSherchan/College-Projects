@@ -1,22 +1,58 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.layout.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.geometry.*?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.paint.Color?>
+<?import javafx.scene.paint.LinearGradient?>
+<?import javafx.scene.paint.Stop?>
 
-<BorderPane fx:controller="application.controller.HomeController"
-            xmlns:fx="http://javafx.com/fxml"
-            styleClass="mainFxmlClass"
-            stylesheets="/application/styles/UserRegistration.css">
+<BorderPane prefHeight="258.0" prefWidth="698.0" style="-fx-background-color: #CCCC;" styleClass="mainFxmlClass" stylesheets="/application/styles/home.css" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/21" fx:controller="application.controller.HomeController">
 
-    <center>
-        <VBox spacing="10" alignment="CENTER">
-            <Label text="Welcome to Masathai Citizenship Assessment"/>
-            <Label text="Choose an option below:"/>
-            <Button text="Admin Login" onAction="#adminLogin"/>
-            <Button text="User Registration" onAction="#userRegistration"/>
-            <Button text="User Login" onAction="#userLogin"/>
-        </VBox>
+ <center>
+        <HBox alignment="CENTER" prefHeight="108.0" prefWidth="298.0" spacing="20">
+            <!-- Left VBox with buttons -->
+            <VBox alignment="CENTER_LEFT" prefHeight="158.0" prefWidth="424.0" spacing="10">
+                <Label style="-fx-font-size: 16; -fx-text-fill: #2ecc71;" />
+                <Button onAction="#adminLogin" style="-fx-font-size: 14; -fx-background-color: #27ae60; -fx-text-fill: white; -fx-font-weight: bold;" text="Admin Login" />
+                <Button onAction="#userRegistration" style="-fx-font-size: 14; -fx-background-color: #27ae60; -fx-text-fill: white; -fx-font-weight: bold;" text="User Registration" />
+                <Button onAction="#userLogin" style="-fx-font-size: 14; -fx-background-color: #27ae60; -fx-text-fill: white; -fx-font-weight: bold;" text="User Login" />
+            </VBox>
+
+            <!-- Right ImageView -->
+       
+        </HBox>
     </center>
+   <left>
+      <ImageView fitHeight="112.0" fitWidth="259.0" pickOnBounds="true" preserveRatio="true" BorderPane.alignment="CENTER">
+         <image>
+            <Image url="@../resources/fxml_images/images.jpg" />
+         </image>
+      </ImageView>
+   </left>
+   <top>
+          <Label prefHeight="27.0" prefWidth="461.0" style="-fx-font-size: 18; -fx-font-weight: bold; -fx-text-fill: #2ecc71;" text="Welcome to Masathai Citizenship Assessment" BorderPane.alignment="CENTER">
+         <textFill>
+            <LinearGradient endX="1.0" endY="1.0">
+               <stops>
+                  <Stop>
+                     <color>
+                        <Color red="0.6421052813529968" green="0.06658869236707687" blue="0.06658869236707687" />
+                     </color>
+                  </Stop>
+                  <Stop offset="1.0">
+                     <color>
+                        <Color red="1.0" green="1.0" blue="1.0" />
+                     </color>
+                  </Stop>
+               </stops>
+            </LinearGradient>
+         </textFill>
+      </Label>
+   </top>
 
 </BorderPane>

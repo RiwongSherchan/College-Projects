@@ -1,0 +1,43 @@
+/* candidateRegistration.css */
+
+.grid-container {
+    -fx-hgap: 10;
+    -fx-vgap: 10;
+    -fx-padding: 20;
+    -fx-background-color: linear-gradient(to bottom right, #4CAF50, #2196F3);
+}
+
+.header-label {
+    -fx-text-fill: #FFD700; /* Gold color */
+    -fx-font-size: 18px;
+    -fx-font-weight: bold;
+}
+
+.label {
+    
+    -fx-border-color: white; /* White border color */
+    -fx-border-width: 2px; /* Border width */
+    -fx-text-fill: #FFD700; /* Gold text color */
+    -fx-font-size: 14px;
+    -fx-padding: 5 10 5 10; /* Extra padding (top, right, bottom, left) */
+    -fx-font-weight: bold;
+}
+.text-field {
+    -fx-background-color: #ffffff;
+    -fx-text-fill: black;
+    -fx-font-size: 14px;
+    -fx-padding: 5; /* Extra padding (all sides) */
+}
+
+.radio-button {
+    -fx-text-fill: #00BFFF; /* Deep sky blue color */
+    -fx-font-size: 14px;
+    -fx-padding: 5 0 5 0; /* Extra padding (top, right, bottom, left) */
+}
+
+.button {
+    -fx-background-color: #FF6347; /* Tomato color */
+    -fx-text-fill: white;
+    -fx-font-size: 14px;
+    -fx-padding: 10 20; /* Extra padding (top/bottom, left/right) */
+}
