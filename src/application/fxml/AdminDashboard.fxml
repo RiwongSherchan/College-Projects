@@ -1,31 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
 <!-- AdminDashboard.fxml -->
+
+<?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.controller.AdminDashboardController">
+<AnchorPane prefHeight="648.0" prefWidth="857.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.controller.AdminDashboardController">
     <children>
-        <VBox prefHeight="400.0" prefWidth="200.0" style="-fx-background-color: #f0f0f0;">
-            <Label text="Admin Dashboard" style="-fx-font-size: 18; -fx-font-weight: bold;" />
-            <ComboBox fx:id="candidatesDropdown" prefWidth="150.0" onAction="#openTestResultAnalysis" />
-            <Label text="Candidate Details" style="-fx-font-size: 16; -fx-font-weight: bold;" />
-            <AnchorPane fx:id="candidateDetailsPane" prefHeight="200.0" prefWidth="200.0">
-                <children>
-                    <HBox layoutX="14.0" layoutY="14.0" spacing="5.0">
-                        <children>
-                            <Label fx:id="nameLabel" text="Name: " />
-                            <Label fx:id="genderLabel" text="Gender: " />
-                            <Label fx:id="countryLabel" text="Country: " />
-                        </children>
-                    </HBox>
-                    <!-- Added labels for displaying the score, selected answers, and correct answers -->
-                    <Label fx:id="scoreLabel" layoutY="50.0" text="Score: " />
-                    <Label fx:id="selectedAnswersLabel" layoutY="70.0" text="Selected Answers: " />
-                    <Label fx:id="correctAnswersLabel" layoutY="90.0" text="Correct Answers: " />
-                </children>
-            </AnchorPane>
+        <VBox prefHeight="166.0" prefWidth="234.0" style="-fx-background-color: #f0f0f0;">
+            <Label prefHeight="72.0" prefWidth="253.0" style="-fx-font-size: 18; -fx-font-weight: bold;" text="Admin Dashboard" />
         </VBox>
+         <AnchorPane fx:id="candidateDetailsPane" layoutX="233.0" prefHeight="648.0" prefWidth="610.0">
+             <children>
+                 <HBox layoutX="9.0" layoutY="29.0" prefHeight="27.0" prefWidth="590.0" spacing="5.0">
+                     <children>
+                         <Label fx:id="nameLabel" prefHeight="18.0" prefWidth="186.0" text="Name: " />
+                         <Label fx:id="genderLabel" prefHeight="18.0" prefWidth="136.0" text="Gender: " />
+                         <Label fx:id="countryLabel" prefHeight="18.0" prefWidth="200.0" text="Country: " />
+                     </children>
+                 </HBox>
+                 <!-- Added labels for displaying the score, selected answers, and correct answers -->
+                 <Label fx:id="scoreLabel" layoutX="22.0" layoutY="52.0" text="Score: " />
+                 <Label fx:id="selectedAnswersLabel" layoutX="298.0" layoutY="78.0" text="Selected Answers: " />
+                 <Label fx:id="correctAnswersLabel" layoutX="425.0" layoutY="78.0" text="Correct Answers: " />
+               <Label layoutX="166.0" layoutY="1.0" style="-fx-font-size: 16; -fx-font-weight: bold;" text="Candidate Details" />
+            <Label fx:id="QuestionLabel" layoutX="7.0" layoutY="78.0" text="Question " />
+             </children>
+         </AnchorPane>
+      <Button fx:id="LogoutButton" onAction="#logout" layoutX="25.0" layoutY="597.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="144.0" text="Logout" />
+         <ComboBox fx:id="candidatesDropdown" layoutX="33.0" layoutY="179.0" onAction="#openTestResultAnalysis" prefWidth="150.0" />
     </children>
 </AnchorPane>

@@ -20,7 +20,8 @@
    	<Label fx:id="genderLabel" layoutX="459.0" layoutY="281.0" prefHeight="27.0" prefWidth="222.0" text="s" />
    
       	<!-- Buttons for Examination, Profile Settings, and Test Results -->
-   	<Button fx:id="openExamination" layoutX="70.0" layoutY="163.0" onAction="#openExamination" prefHeight="79.0" prefWidth="210.0" text="Examination" />
-   	<Button fx:id="LogoutButton" layoutX="70.0" layoutY="274.0" onAction="#logout" prefHeight="42.0" prefWidth="210.0" text="Logout" />
+   	<Button fx:id="openExamination" layoutX="40.0" layoutY="149.0" onAction="#openExamination" prefHeight="79.0" prefWidth="210.0" text="Examination" />
+   	<Button fx:id="LogoutButton" layoutX="40.0" layoutY="411.0" onAction="#logout" prefHeight="42.0" prefWidth="210.0" text="Logout" />
+      <Button fx:id="ViewTest" onAction="#ViewTestReport" layoutX="40.0" layoutY="260.0" mnemonicParsing="false" prefHeight="42.0" prefWidth="210.0" text="View Test Report" />
    </children>
 </AnchorPane>

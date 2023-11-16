@@ -10,6 +10,8 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
@@ -41,9 +43,8 @@ public class AdminLoginController {
 				String[] components = line.split(",");
 				if (components.length >= 2 && email.equals(components[0]) && password.equals(components[1])) {
 					System.out.println("User authenticated!");
-					
-					FXMLLoader loader = new FXMLLoader(
-							getClass().getResource("/application/fxml/AdminDashboard.fxml"));
+
+					FXMLLoader loader = new FXMLLoader(getClass().getResource("/application/fxml/AdminDashboard.fxml"));
 
 					Parent root = null;
 					try {
@@ -68,6 +69,8 @@ public class AdminLoginController {
 
 				} else {
 					System.out.println("failed");
+					System.out.println("Login failed");
+					showAlert("Login Failed", "Invalid credentials. Please try again.");
 				}
 
 			}
@@ -80,6 +83,15 @@ public class AdminLoginController {
 	private void cancelButtonClicked(ActionEvent event) {
 		Stage stage = (Stage) CancelButton.getScene().getWindow();
 		stage.close();
+	}
+	
+	
+	private void showAlert(String title, String message) {
+	    Alert alert = new Alert(AlertType.ERROR);
+	    alert.setTitle(title);
+	    alert.setHeaderText(null);
+	    alert.setContentText(message);
+	    alert.showAndWait();
 	}
 
 	// You can add more methods as needed, such as a method to validate credentials

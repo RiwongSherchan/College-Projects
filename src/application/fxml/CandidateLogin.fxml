@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-
 <!-- Login.fxml -->
 
 <?import javafx.geometry.Insets?>
@@ -11,18 +10,21 @@
 <?import javafx.scene.layout.VBox?>
 
 <VBox xmlns="http://javafx.com/javafx"
-	xmlns:fx="http://javafx.com/fxml"
-	fx:controller="application.controller.CandidateLoginController">
-	<padding>
-		<Insets top="10" right="20" bottom="10" left="20" />
-	</padding>
+      xmlns:fx="http://javafx.com/fxml"
+      fx:controller="application.controller.CandidateLoginController">
+    <padding>
+        <Insets top="10" right="20" bottom="10" left="20" />
+    </padding>
 
-	<Label text="User Login" />
+    <Label text="User Login" />
 
-	<TextField fx:id="emailField" promptText="Email" />
-	<PasswordField fx:id="passwordField"
-		promptText="Password" />
+    <TextField fx:id="emailField" promptText="Email" />
+    <PasswordField fx:id="passwordField" promptText="Password" />
 
-	<Button fx:id="LoginButton" text="Login" onAction="#loginButtonClicked" />
-	<Button fx:id="CancelButton" text="Cancel" onAction="#cancelButtonClicked" />
+    <Button fx:id="loginButton" text="Login" onAction="#loginButtonClicked" />
+    <Button fx:id="cancelButton" text="Cancel" onAction="#cancelButtonClicked" />
+
+    <!-- New label for displaying login status -->
+    <Label fx:id="loginStatusLabel" text="" visible="false" style="-fx-text-fill: red;" />
+
 </VBox>

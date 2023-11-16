@@ -10,88 +10,101 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.scene.control.Alert.AlertType;
 import javafx.stage.Stage;
 
 public class CandidateLoginController {
 
-	@FXML
-	private TextField emailField;
+    @FXML
+    private TextField emailField;
 
-	@FXML
-	private PasswordField passwordField;
+    @FXML
+    private PasswordField passwordField;
 
-	@FXML
-	private Button LoginButton;
+    @FXML
+    private Button loginButton;
 
-	@FXML
-	private Button CancelButton;
+    @FXML
+    private Button cancelButton;
 
-	@FXML
-	private void loginButtonClicked(ActionEvent event) {
-		// Implement your login logic here
-		String email = emailField.getText();
-		String password = passwordField.getText();
+    @FXML
+    private Label loginStatusLabel; // New label for displaying login status
 
-		try (BufferedReader reader = new BufferedReader(new FileReader("Candidate.txt"))) {
-			String line;
-			while ((line = reader.readLine()) != null) {
-				String[] components = line.split(",");
-				if (components.length >= 6 && email.equals(components[2]) && password.equals(components[5])) {
-					System.out.println("User authenticated!");
-					// Additional logic can be added here, such as opening the dashboard.
-					// Authentication successful
+    @FXML
+    private void loginButtonClicked(ActionEvent event) {
+        // Implement your login logic here
+        String email = emailField.getText();
+        String password = passwordField.getText();
 
-					Candidate authenticatedCandidate = new Candidate(components[0], // firstName
-							components[1], // lastName
-							components[2], // email
-							components[3], // gender
-							components[4], // country
-							components[5], // password
-							components[6]); // contactNumber
-					FXMLLoader loader = new FXMLLoader(
-							getClass().getResource("/application/fxml/CandidateDashboard.fxml"));
+        try (BufferedReader reader = new BufferedReader(new FileReader("Candidate.txt"))) {
+            String line;
+            boolean authenticationSuccessful = false;
+            while ((line = reader.readLine()) != null) {
+                String[] components = line.split(",");
+                if (components.length >= 6 && email.equals(components[2]) && password.equals(components[5])) {
+                    System.out.println("User authenticated!");
+                    authenticationSuccessful = true;
+                    // Additional logic can be added here, such as opening the dashboard.
+                    // Authentication successful
 
-					Parent root = null;
-					try {
-						root = loader.load();
+                    Candidate authenticatedCandidate = new Candidate(components[0], // firstName
+                            components[1], // lastName
+                            components[2], // email
+                            components[3], // gender
+                            components[4], // country
+                            components[5], // password
+                            components[6]); // contactNumber
+                    FXMLLoader loader = new FXMLLoader(
+                            getClass().getResource("/application/fxml/CandidateDashboard.fxml"));
 
-						// Get the controller instance and initialize it if needed
-						CandidateDashboardController controller = loader.getController();
-						controller.setCandidate(authenticatedCandidate);
-						controller.initialize(); // You can modify this method name as per your need
-						Stage CloseCurrentStage = (Stage) LoginButton.getScene().getWindow();
-						CloseCurrentStage.close();
+                    Parent root = null;
+                    try {
+                        root = loader.load();
 
-						Stage stage = new Stage();
-						stage.setTitle("Masathai Exam");
-						stage.setScene(new Scene(root));
-						stage.show();
+                        // Get the controller instance and initialize it if needed
+                        CandidateDashboardController controller = loader.getController();
+                        controller.setCandidate(authenticatedCandidate);
+                        controller.initialize(); // You can modify this method name as per your need
+                        Stage closeCurrentStage = (Stage) loginButton.getScene().getWindow();
+                        closeCurrentStage.close();
 
-						// Close the current stage if needed
+                        Stage stage = new Stage();
+                        stage.setTitle("Candidate Dashboard");
+                        stage.setScene(new Scene(root));
+                        stage.show();
 
-					} catch (IOException e) {
-						e.printStackTrace();
-					}
+                        // Close the current stage if needed
 
-				} else {
-					System.out.println("failed");
-				}
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
 
-			}
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-	}
+                }
+            }
 
-	@FXML
-	private void cancelButtonClicked(ActionEvent event) {
-		Stage stage = (Stage) CancelButton.getScene().getWindow();
-		stage.close();
-	}
+            if (!authenticationSuccessful) {
+                System.out.println("Login failed");
+                // Show login failed label
+                loginStatusLabel.setText("Login failed. Please check your credentials.");
+                loginStatusLabel.setVisible(true);
+            }
 
-	// You can add more methods as needed, such as a method to validate credentials
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @FXML
+    private void cancelButtonClicked(ActionEvent event) {
+        Stage stage = (Stage) cancelButton.getScene().getWindow();
+        stage.close();
+    }
+
+    // You can add more methods as needed, such as a method to validate credentials
 
 }

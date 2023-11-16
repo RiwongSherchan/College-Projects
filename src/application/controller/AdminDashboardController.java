@@ -1,12 +1,18 @@
 package application.controller;
 
 import application.model.Candidate;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
+import javafx.stage.Stage;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
+import javafx.scene.control.Button;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
@@ -36,14 +42,39 @@ public class AdminDashboardController {
 
 	@FXML
 	private Label correctAnswersLabel;
+	
+	@FXML
+	private Label QuestionLabel;
 
 	@FXML
 	private ComboBox<Candidate> candidatesDropdown;
+	
+	@FXML
+	private Button LogoutButton;
 
 	public void initialize() {
 		// Populate the candidatesDropdown with Candidate objects
 		populateCandidatesDropdown();
 		clearCandidateDetails();
+		displayQuestionNumbers();
+	}
+	
+	private void displayQuestionNumbers() {
+	    int totalQuestions = 20;
+	    int questionNumber = 1; // Starting question number
+
+	    // Assuming you have labels for each question, you can update them in a loop
+	    while (questionNumber <= totalQuestions) {
+	        // Create labels for question details
+	        Label questionLabel = new Label("Question " + questionNumber + ":");
+	        questionLabel.setLayoutX(7.0); // Adjust the layout as needed
+	        questionLabel.setLayoutY(78.0 + (questionNumber * 20)); // Adjust the layout as needed
+
+	        // Add the labels to your layout (replace with your specific layout)
+	        candidateDetailsPane.getChildren().add(questionLabel);
+
+	        questionNumber++;
+	    }
 	}
 
 	private void populateCandidatesDropdown() {
@@ -113,8 +144,8 @@ public class AdminDashboardController {
 
 		// Display the fetched data
 		scoreLabel.setText("Score: " + score);
-		selectedAnswersLabel.setText("Selected Answers: " + String.join(", ", selectedAnswers));
-		correctAnswersLabel.setText("Correct Answers: " + String.join(", ", correctAnswers));
+		selectedAnswersLabel.setText("Selected Answers: \n" + String.join("\n", selectedAnswers));
+		correctAnswersLabel.setText("Correct Answers: \n" + String.join("\n", correctAnswers));
 	}
 
 	private void clearCandidateDetails() {
@@ -192,4 +223,31 @@ public class AdminDashboardController {
 		alert.setContentText(message);
 		alert.showAndWait();
 	}
+	
+	
+	// Method to handle the "Logout" button click
+		@FXML
+		private void logout(ActionEvent event) {
+			FXMLLoader loader = new FXMLLoader(getClass().getResource("/application/fxml/home.fxml"));
+
+			Parent root = null;
+			try {
+				root = loader.load();
+
+				// Get the controller instance and initialize it if needed
+				HomeController controller = loader.getController();
+				// controller.initialize(); // You can modify this method name as per your need
+				Stage CloseCurrentStage = (Stage) LogoutButton.getScene().getWindow();
+				CloseCurrentStage.close();
+				Stage stage = new Stage();
+				stage.setTitle("home");
+				stage.setScene(new Scene(root));
+				stage.show();
+
+				// Close the current stage if needed
+
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+}
 }
