@@ -1,88 +1,113 @@
 package application.controller;
 
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
+import application.model.Candidate;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
-import javafx.stage.Stage;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.ArrayList;
+import java.util.List;
 
 public class AdminDashboardController {
 
-    @FXML
-    private Label totalCandidatesLabel;
+	@FXML
+	private AnchorPane candidateDetailsPane;
 
-    @FXML
-    private ComboBox<String> candidateComboBox;
+	@FXML
+	private Label nameLabel;
 
-    private Map<String, String> candidateData = new HashMap<>();
+	@FXML
+	private Label genderLabel;
 
-    public void initialize() {
-        // Initialize the total number of candidates
-        int totalCandidates = loadCandidateData();
-        totalCandidatesLabel.setText(String.valueOf(totalCandidates));
+	@FXML
+	private Label countryLabel;
+	@FXML
+	private ComboBox<Candidate> candidatesDropdown;
 
-        // Populate the ComboBox with candidate names
-        ObservableList<String> candidateNames = FXCollections.observableArrayList(candidateData.keySet());
-        candidateComboBox.setItems(candidateNames);
-    }
+	public void initialize() {
+		// Populate the candidatesDropdown with Candidate objects
+		populateCandidatesDropdown();
+		clearCandidateDetails();
+	}
 
-    @FXML
-    private void openTestResultAnalysis() {
-        String selectedCandidate = candidateComboBox.getValue();
-        if (selectedCandidate != null) {
-            FXMLLoader loader = new FXMLLoader(
-                    getClass().getResource("/application/fxml/TestResultAnalysis.fxml"));
+	private void populateCandidatesDropdown() {
+		// Clear existing items
+		candidatesDropdown.getItems().clear();
 
-            Parent root = null;
-            try {
-                root = loader.load();
+		// Add logic to read candidate data from the data source (e.g., Candidate.txt)
+		// and populate the candidatesDropdown with Candidate objects
 
-                // Get the controller instance and initialize it if needed
-                TestResultAnalysisController controller = loader.getController();
-                controller.initialize(selectedCandidate, candidateData.get(selectedCandidate));
+		// For example:
+		List<Candidate> candidates = getCandidatesFromDataSource();
+		candidatesDropdown.getItems().addAll(candidates);
+	}
 
-                Stage stage = new Stage();
-                stage.setTitle("Admin Dashboard");
-                stage.setScene(new Scene(root));
-                stage.show();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }
-    }
+	// Dummy method to get a list of Candidate objects (replace with actual logic)
+	private List<Candidate> getCandidatesFromDataSource() {
+		List<Candidate> candidates = new ArrayList<>();
 
-    // Dummy method to load candidate data from Candidate.txt
-    private int loadCandidateData() {
-        int totalCandidates = 0;
+		try (BufferedReader reader = new BufferedReader(new FileReader("Candidate.txt"))) {
+			String line;
+			while ((line = reader.readLine()) != null) {
+				String[] parts = line.split(",");
+				String firstName = parts[0];
+				String lastName = parts[1];
+				String email = parts[2];
+				String gender = parts[3];
+				String country = parts[4];
+				String password = parts[5];
+				String contactNumber = parts[6];
 
-        try (BufferedReader reader = new BufferedReader(new FileReader("Candidate.txt"))) {
-            String line;
-            while ((line = reader.readLine()) != null) {
-                String[] parts = line.split(",");
-                if (parts.length == 7) {
-                    String fullName = parts[0] + " " + parts[1];
-                    String email = parts[2];
-                    String gender = parts[3];
-                    String country = parts[4];
+				Candidate candidate = new Candidate(firstName, lastName, email, gender, country, password,
+						contactNumber);
+				candidates.add(candidate);
+			}
+		} catch (IOException e) {
+			e.printStackTrace();
+			// Handle the exception (e.g., log it, show an error message)
+		}
 
-                    candidateData.put(fullName, email + "," + gender + "," + country);
-                    totalCandidates++;
-                }
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+		return candidates;
+	}
 
-        return totalCandidates;
-    }
+	@FXML
+	private void openTestResultAnalysis() {
+		// Retrieve the selected candidate from the dropdown
+		Candidate selectedCandidate = candidatesDropdown.getSelectionModel().getSelectedItem();
+
+		if (selectedCandidate == null) {
+			// Show an alert if no candidate is selected
+			showAlert("Please select a candidate.");
+		} else {
+			// Open the test result analysis window for the selected candidate
+			displayCandidateDetails(selectedCandidate);
+		}
+	}
+
+	private void displayCandidateDetails(Candidate candidate) {
+		nameLabel.setText("Name: " + candidate.getFirstName() + " " + candidate.getLastName());
+		genderLabel.setText("Gender: " + candidate.getGender());
+		countryLabel.setText("Country: " + candidate.getCountry());
+	}
+
+	private void clearCandidateDetails() {
+		nameLabel.setText("Name: ");
+		genderLabel.setText("Gender: ");
+		countryLabel.setText("Country: ");
+	}
+
+
+	private void showAlert(String message) {
+		Alert alert = new Alert(AlertType.INFORMATION);
+		alert.setTitle("Information");
+		alert.setHeaderText(null);
+		alert.setContentText(message);
+		alert.showAndWait();
+	}
 }

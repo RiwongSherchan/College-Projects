@@ -19,6 +19,12 @@ public class Candidate {
     public String getFirstName() {
         return firstName;
     }
+    
+    @Override
+    public String toString() {
+        // Customize the string representation for display in ComboBox
+        return firstName + " (" + gender + ", " + country + ")";
+    }
 
     public Candidate(String firstName, String lastName, String email, String gender, String country, String password,
 			String contactNumber) {
@@ -30,6 +36,12 @@ public class Candidate {
 		this.country = country;
 		this.password = password;
 		this.contactNumber = contactNumber;
+	}
+
+	public Candidate(String firstName, String lastName, String country) {
+		this.firstName = firstName;
+		this.lastName = lastName;
+		this.country = country;
 	}
 
 	public String getPassword() {

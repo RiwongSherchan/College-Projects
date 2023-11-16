@@ -84,7 +84,7 @@ public class CandidateRegistrationController {
 		Candidate NewCandidate = new Candidate(firstName, lastName, email, gender, country, password,contactNumber);
 		candidates.add(NewCandidate);
 
-		saveToTextFile(firstName, lastName, email, gender, country, contactNumber,password);
+		saveToTextFile(firstName, lastName, email, gender, country, password, contactNumber);
 
 		Stage stage = (Stage) registerButton.getScene().getWindow();
 		stage.close();

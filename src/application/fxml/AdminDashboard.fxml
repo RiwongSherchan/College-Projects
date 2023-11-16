@@ -1,22 +1,30 @@
-<?xml version="1.0" encoding="UTF-8"?>
-
 <!-- AdminDashboard.fxml -->
 
-<?import javafx.scene.control.Button?>
+
+<?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<VBox prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1"
-    fx:controller="application.controller.AdminDashboardController">
-    
-    <Label text="Admin Dashboard" />
-
-    <HBox spacing="10">
-        <Label text="Total Candidates: " />
-        <Label fx:id="totalCandidatesLabel" />
-    </HBox>
-
-    <Button text="Test Result Analysis" onAction="#openTestResultAnalysis" />
-
-</VBox>
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.controller.AdminDashboardController">
+    <children>
+        <VBox prefHeight="400.0" prefWidth="200.0" style="-fx-background-color: #f0f0f0;">
+            <Label text="Admin Dashboard" style="-fx-font-size: 18; -fx-font-weight: bold;" />
+            <ComboBox fx:id="candidatesDropdown" prefWidth="150.0" onAction="#openTestResultAnalysis" />
+            <Label text="Candidate Details" style="-fx-font-size: 16; -fx-font-weight: bold;" />
+            <AnchorPane fx:id="candidateDetailsPane" prefHeight="200.0" prefWidth="200.0">
+                <children>
+                    <HBox layoutX="14.0" layoutY="14.0" spacing="5.0">
+                        <children>
+                            <Label fx:id="nameLabel" text="Name: " />
+                            <Label fx:id="genderLabel" text="Gender: " />
+                            <Label fx:id="countryLabel" text="Country: " />
+                            
+                        </children>
+                    </HBox>
+                </children>
+            </AnchorPane>
+        </VBox>
+    </children>
+</AnchorPane>
