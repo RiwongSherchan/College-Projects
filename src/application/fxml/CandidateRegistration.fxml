@@ -1,78 +1,65 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.RadioButton?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.ColumnConstraints?>
-<?import javafx.scene.layout.GridPane?>
-<?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Font?>
 
-
-<AnchorPane xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.controller.CandidateRegistrationController">
+<AnchorPane prefHeight="581.0" prefWidth="800.0" stylesheets="@../resources/styles/candidateRegistration.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.controller.CandidateRegistrationController">
    <children>
-      <GridPane styleClass="grid-container" stylesheets="@../resources/styles/candidateRegistration.css">
-          <padding>
-              <Insets bottom="10" left="10" right="10" top="10" />
-          </padding>
-          <Label styleClass="label" text="First Name" GridPane.rowIndex="4" />
-          <TextField fx:id="firstNameField" styleClass="text-field" GridPane.columnIndex="2" GridPane.rowIndex="4" />
-      
-          <Label styleClass="label" text="Last Name" GridPane.rowIndex="6" />
-          <TextField fx:id="lastNameField" styleClass="text-field" GridPane.columnIndex="2" GridPane.rowIndex="6" />
-      
-          <Label styleClass="label" text="Email" GridPane.rowIndex="7" />
-          <TextField fx:id="emailField" styleClass="text-field" GridPane.columnIndex="2" GridPane.rowIndex="7" />
-      
-          <Label styleClass="label" text="Gender" GridPane.rowIndex="8" />
-          <RadioButton fx:id="maleRadioButton" mnemonicParsing="false" styleClass="radio-button" text="male" GridPane.columnIndex="2" GridPane.rowIndex="8" />
-          <RadioButton fx:id="femaleRadioButton" mnemonicParsing="false" styleClass="radio-button" text="Female" GridPane.columnIndex="2" GridPane.rowIndex="9" />
-      
-          <Label styleClass="label" text="Country" GridPane.rowIndex="10" />
-          <RadioButton fx:id="thailandRadioButton" mnemonicParsing="false" styleClass="radio-button" text="Thailand" textFill="#360a20" GridPane.columnIndex="2" GridPane.rowIndex="10" />
-          <RadioButton fx:id="malaysiaRadioButton" mnemonicParsing="false" styleClass="radio-button" text="Malaysia" GridPane.columnIndex="2" GridPane.rowIndex="11" />
-          <RadioButton fx:id="singaporeRadioButton" mnemonicParsing="false" styleClass="radio-button" text="Singapore" GridPane.columnIndex="2" GridPane.rowIndex="12" />
-      
-          <Label styleClass="label" text="Password" GridPane.rowIndex="13" />
-          <TextField fx:id="passwordField" styleClass="text-field" GridPane.columnIndex="2" GridPane.rowIndex="13" />
-      
-          <Label styleClass="label" text="Contact Number" GridPane.rowIndex="14" />
-          <TextField fx:id="contactNumberField" styleClass="text-field" GridPane.columnIndex="2" GridPane.rowIndex="14" />
-      
-          <Button fx:id="registerButton" mnemonicParsing="false" onAction="#registerButtonClicked" styleClass="button" text="Register" GridPane.rowIndex="15" />
-      
-          <Button fx:id="CancelButton" onAction="#cancelButtonClicked" styleClass="button" text="Cancel" GridPane.columnIndex="2" GridPane.rowIndex="15" />
-         <columnConstraints>
-            <ColumnConstraints />
-            <ColumnConstraints maxWidth="0.0" minWidth="0.0" prefWidth="0.0" />
-            <ColumnConstraints maxWidth="160.0" minWidth="160.0" prefWidth="160.0" />
-         </columnConstraints>
-         <rowConstraints>
-            <RowConstraints />
-            <RowConstraints />
-            <RowConstraints />
-            <RowConstraints />
-            <RowConstraints />
-            <RowConstraints />
-            <RowConstraints />
-            <RowConstraints />
-            <RowConstraints />
-            <RowConstraints />
-            <RowConstraints />
-            <RowConstraints />
-            <RowConstraints />
-            <RowConstraints />
-            <RowConstraints />
-            <RowConstraints />
-         </rowConstraints>
-      </GridPane>
-   <Label prefHeight="34.0" prefWidth="348.0" styleClass="title" text="                      Registration Form">
+   <Label layoutX="217.0" layoutY="6.0" prefHeight="34.0" prefWidth="348.0" styleClass="title" text="                      Registration Form">
          <font>
             <Font name="Baskerville Old Face" size="18.0" />
          </font>
       </Label>
+       <Label layoutX="89.0" layoutY="79.0" styleClass="label" text="First Name" />
+       <TextField fx:id="firstNameField" layoutX="264.0" layoutY="76.0" prefHeight="35.0" prefWidth="342.0" styleClass="text-field" />
+   
+          <Label layoutX="89.0" layoutY="133.0" styleClass="label" text="Last Name" />
+       <TextField fx:id="lastNameField" layoutX="269.0" layoutY="130.0" styleClass="text-field" />
+   
+          <Label layoutX="89.0" layoutY="178.0" styleClass="label" text="Email" />
+       <TextField fx:id="emailField" layoutX="264.0" layoutY="175.0" styleClass="text-field" />
+   
+          <Label layoutX="89.0" layoutY="221.0" prefHeight="30.0" prefWidth="88.0" styleClass="label" text="Gender:" />
+       <RadioButton fx:id="maleRadioButton" layoutX="119.0" layoutY="245.0" mnemonicParsing="false" styleClass="radio-button" text="male" />
+       <RadioButton fx:id="femaleRadioButton" layoutX="265.0" layoutY="245.0" mnemonicParsing="false" styleClass="radio-button" text="Female" />
+   
+          <Label layoutX="89.0" layoutY="302.0" styleClass="label" text="Country:" />
+       <RadioButton fx:id="thailandRadioButton" layoutX="89.0" layoutY="352.0" mnemonicParsing="false" styleClass="radio-button" text="Thailand" textFill="#360a20" />
+       <RadioButton fx:id="malaysiaRadioButton" layoutX="286.0" layoutY="352.0" mnemonicParsing="false" styleClass="radio-button" text="Malaysia" />
+       <RadioButton fx:id="singaporeRadioButton" layoutX="508.0" layoutY="352.0" mnemonicParsing="false" styleClass="radio-button" text="Singapore" />
+   
+          <Label layoutX="92.0" layoutY="429.0" styleClass="label" text="Password" />
+       <TextField fx:id="passwordField" layoutX="280.0" layoutY="426.0" styleClass="text-field" />
+   
+          <Label layoutX="97.0" layoutY="480.0" styleClass="label" text="Contact Number" />
+       <TextField fx:id="contactNumberField" layoutX="280.0" layoutY="477.0" styleClass="text-field" />
+   
+          <Button fx:id="registerButton" layoutX="205.0" layoutY="535.0" mnemonicParsing="false" onAction="#registerButtonClicked" prefHeight="58.0" prefWidth="162.0" styleClass="button" text="Register">
+         <font>
+            <Font size="10.0" />
+         </font></Button>
+   
+          <Button fx:id="CancelButton" layoutX="411.0" layoutY="535.0" onAction="#cancelButtonClicked" styleClass="button" text="Cancel" />
+      <ImageView fitHeight="21.0" fitWidth="39.0" layoutX="201.0" layoutY="362.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../resources/fxml_images/thailandflag.jpg" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="21.0" fitWidth="39.0" layoutX="400.0" layoutY="362.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../resources/fxml_images/malaysiaflag.jpg" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="21.0" fitWidth="39.0" layoutX="629.0" layoutY="362.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../resources/fxml_images/singapourflag.jpg" />
+         </image>
+      </ImageView>
    </children>
 </AnchorPane>

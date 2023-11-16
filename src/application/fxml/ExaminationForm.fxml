@@ -6,6 +6,8 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.RadioButton?>
 <?import javafx.scene.control.ToggleGroup?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 
 <AnchorPane prefHeight="629.0" prefWidth="929.0" stylesheets="@../resources/styles/ExaminationForm.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.controller.ExaminationFormController">
@@ -31,5 +33,10 @@
 		
       		<Button fx:id="submitButton" layoutX="417.0" layoutY="359.0" onAction="#submitButtonClicked" text="Submit" />
       <Label layoutX="285.0" layoutY="22.0" prefHeight="18.0" prefWidth="374.0" text="                        Examination Form" />
+      <ImageView fx:id="countryFlagImageView" fitHeight="26.0" fitWidth="41.0" layoutX="828.0" layoutY="53.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../resources/fxml_images/singapourflag.jpg" />
+         </image>
+      </ImageView>
    </children>
 </AnchorPane>

@@ -13,6 +13,8 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
 
 public class CandidateDashboardController {
@@ -35,6 +37,9 @@ public class CandidateDashboardController {
 	@FXML
 	private Button ViewTest;
 
+	@FXML
+	private ImageView countryFlagImageView;
+
 	private Candidate candidate;
 
 	public void initialize() {
@@ -43,12 +48,25 @@ public class CandidateDashboardController {
 			firstNameLabel.setText("First Name: " + candidate.getFirstName());
 			lastNameLabel.setText("Last Name: " + candidate.getLastName());
 			genderLabel.setText("Gender: " + candidate.getGender());
+			updateCountryFlagImage(candidate);
 		}
+
+		
+
 	}
 
 	// Add a setter method to set the Candidate object
 	public void setCandidate(Candidate candidate) {
 		this.candidate = candidate;
+	}
+
+	private void updateCountryFlagImage(Candidate candidate) {
+        System.out.println(candidate.getCountry());
+		String country = candidate.getCountry().toLowerCase();
+		String imageUrl = String.format("/application/resources/fxml_images/%sflag.jpg", country);
+		Image image = new Image(getClass().getResourceAsStream(imageUrl));
+		countryFlagImageView.setImage(image);
+
 	}
 
 	@FXML
@@ -59,8 +77,7 @@ public class CandidateDashboardController {
 		double percentage = (double) score / 20 * 100;
 
 		// Calculate total correct out of total questions
-		String result = String.format("You scored %d out of %d. Your percentage is %.2f%%", score, 20,
-				percentage);
+		String result = String.format("You scored %d out of %d. Your percentage is %.2f%%", score, 20, percentage);
 
 		// Pass the result to the ResultDisplayController
 
@@ -86,12 +103,10 @@ public class CandidateDashboardController {
 
 			// Initialize the controller
 			controller.initialize();
-			
-			
+
 			// Close the current stage
-	        Stage currentStage = (Stage) ViewTest.getScene().getWindow();
-	        currentStage.close();
-	        
+			Stage currentStage = (Stage) ViewTest.getScene().getWindow();
+			currentStage.close();
 
 			Stage stage = new Stage();
 			stage.setTitle("Result Display");

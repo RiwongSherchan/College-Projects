@@ -81,17 +81,39 @@ public class AdminLoginController {
 
 	@FXML
 	private void cancelButtonClicked(ActionEvent event) {
-		Stage stage = (Stage) CancelButton.getScene().getWindow();
-		stage.close();
+		
+		FXMLLoader loader = new FXMLLoader(getClass().getResource("/application/fxml/home.fxml"));
+	
+		Parent root = null;
+		try {
+			root = loader.load();
+			System.out.println("check 4");
+			// Get the controller instance and initialize it if needed
+			HomeController controller = loader.getController();
+
+			// Close the current stage
+			Stage currentStage = (Stage) CancelButton.getScene().getWindow();
+			currentStage.close();
+
+			
+			Stage stage = new Stage();
+			stage.setTitle("Home");
+			stage.setScene(new Scene(root));
+			stage.show();
+
+			// Close the current stage if needed
+
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
-	
-	
+
 	private void showAlert(String title, String message) {
-	    Alert alert = new Alert(AlertType.ERROR);
-	    alert.setTitle(title);
-	    alert.setHeaderText(null);
-	    alert.setContentText(message);
-	    alert.showAndWait();
+		Alert alert = new Alert(AlertType.ERROR);
+		alert.setTitle(title);
+		alert.setHeaderText(null);
+		alert.setContentText(message);
+		alert.showAndWait();
 	}
 
 	// You can add more methods as needed, such as a method to validate credentials

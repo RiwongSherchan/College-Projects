@@ -1,28 +1,28 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<!-- AdminLogin.fxml -->
 
-<!-- Login.fxml -->
-
-<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.PasswordField?>
 <?import javafx.scene.control.TextField?>
-<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
 
-<VBox xmlns="http://javafx.com/javafx"
-	xmlns:fx="http://javafx.com/fxml"
-	fx:controller="application.controller.AdminLoginController">
-	<padding>
-		<Insets top="10" right="20" bottom="10" left="20" />
-	</padding>
 
-	<Label text="Admin Login" />
-
-	<TextField fx:id="emailField" promptText="Email" />
-	<PasswordField fx:id="passwordField"
-		promptText="Password" />
-
-	<Button fx:id="LoginButton" text="Login" onAction="#loginButtonClicked" />
-	<Button fx:id="CancelButton" text="Cancel" onAction="#cancelButtonClicked" />
-</VBox>
+<AnchorPane prefHeight="457.0" prefWidth="658.0" stylesheets="@../resources/styles/adminLogin.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.controller.AdminLoginController">
+   <children>
+   
+      	<Label styleClass="text label-title" layoutX="164.0" layoutY="45.0" prefHeight="46.0" prefWidth="286.0" text="Admin Login">
+         <font>
+            <Font size="24.0" />
+         </font>
+      </Label>
+   
+      	<TextField styleClass="text text-field" fx:id="emailField" layoutX="150.0" layoutY="168.0" prefHeight="39.0" prefWidth="314.0" promptText="Email" />
+   	<PasswordField styleClass="text text-field" fx:id="passwordField" layoutX="150.0" layoutY="229.0" prefHeight="46.0" prefWidth="314.0" promptText="Password" />
+   
+      	<Button styleClass="button" fx:id="LoginButton" layoutX="113.0" layoutY="291.0" onAction="#loginButtonClicked" prefHeight="86.0" prefWidth="158.0" text="Login" />
+   	<Button styleClass="button" fx:id="CancelButton" layoutX="361.0" layoutY="295.0" onAction="#cancelButtonClicked" prefHeight="78.0" prefWidth="158.0" text="Cancel" />
+   </children>
+</AnchorPane>

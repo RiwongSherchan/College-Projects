@@ -10,6 +10,8 @@ import javafx.scene.control.Label;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.ToggleGroup;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
 
 import java.io.BufferedReader;
@@ -47,6 +49,9 @@ public class ExaminationFormController {
 
 	@FXML
 	private RadioButton optionDRadioButton;
+	
+	@FXML
+	private ImageView countryFlagImageView;
 
 	@FXML
 	private Button nextButton;
@@ -105,6 +110,7 @@ public class ExaminationFormController {
 			firstNameLabel.setText("First Name: " + candidate.getFirstName());
 			genderLabel.setText("Gender: " + candidate.getGender());
 			countryLabel.setText("Country: " + candidate.getCountry());
+			updateCountryFlagImage(candidate);
 		}
 
 		toggleGroup = new ToggleGroup();
@@ -115,6 +121,15 @@ public class ExaminationFormController {
 
 		// Initially, set the Submit button to be invisible
 		submitButton.setVisible(false);
+
+	}
+	
+	private void updateCountryFlagImage(Candidate candidate) {
+        System.out.println(candidate.getCountry());
+		String country = candidate.getCountry().toLowerCase();
+		String imageUrl = String.format("/application/resources/fxml_images/%sflag.jpg", country);
+		Image image = new Image(getClass().getResourceAsStream(imageUrl));
+		countryFlagImageView.setImage(image);
 
 	}
 	

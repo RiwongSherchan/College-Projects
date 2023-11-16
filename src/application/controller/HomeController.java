@@ -7,9 +7,17 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.stage.Stage;
 
 public class HomeController {
+	
+	
+	@FXML
+	private Button AdminLoginButton;
+	
+	@FXML
+	private Button CandidateLoginButton;
 
 	@FXML
 	public void userRegistration(ActionEvent event) {
@@ -24,7 +32,7 @@ public class HomeController {
 			
 
 			Stage stage = (Stage) ((javafx.scene.Node) event.getSource()).getScene().getWindow();
-             stage.setMaximized(true);
+           
 			stage.setScene(scene);
 			stage.setTitle("Candidate Registration");
 			stage.show();
@@ -46,6 +54,9 @@ public class HomeController {
 			// Get the controller instance and initialize it if needed
 			AdminLoginController controller = loader.getController();
 			// controller.initialize(); // You can modify this method name as per your need
+			
+			Stage currentStage = (Stage) AdminLoginButton.getScene().getWindow();
+			currentStage.close();
 
 			Stage stage = new Stage();
 			stage.setTitle("Admin Login");
@@ -71,6 +82,10 @@ public class HomeController {
 			// Get the controller instance and initialize it if needed
 			CandidateLoginController controller = loader.getController();
 			// controller.initialize(); // You can modify this method name as per your need
+			
+			// Close the current stage
+						Stage currentStage = (Stage) CandidateLoginButton.getScene().getWindow();
+						currentStage.close();
 
 			Stage stage = new Stage();
 			stage.setTitle("User Login");

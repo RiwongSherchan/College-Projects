@@ -4,38 +4,24 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
-<?import javafx.scene.layout.BorderPane?>
-<?import javafx.scene.layout.HBox?>
-<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.paint.Color?>
 <?import javafx.scene.paint.LinearGradient?>
 <?import javafx.scene.paint.Stop?>
 
-<BorderPane prefHeight="258.0" prefWidth="698.0" style="-fx-background-color: #CCCC;" styleClass="mainFxmlClass" stylesheets="/application/styles/home.css" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/21" fx:controller="application.controller.HomeController">
 
- <center>
-        <HBox alignment="CENTER" prefHeight="108.0" prefWidth="298.0" spacing="20">
-            <!-- Left VBox with buttons -->
-            <VBox alignment="CENTER_LEFT" prefHeight="158.0" prefWidth="424.0" spacing="10">
-                <Label style="-fx-font-size: 16; -fx-text-fill: #2ecc71;" />
-                <Button onAction="#adminLogin" style="-fx-font-size: 14; -fx-background-color: #27ae60; -fx-text-fill: white; -fx-font-weight: bold;" text="Admin Login" />
-                <Button onAction="#userRegistration" style="-fx-font-size: 14; -fx-background-color: #27ae60; -fx-text-fill: white; -fx-font-weight: bold;" text="User Registration" />
-                <Button onAction="#userLogin" style="-fx-font-size: 14; -fx-background-color: #27ae60; -fx-text-fill: white; -fx-font-weight: bold;" text="User Login" />
-            </VBox>
-
-            <!-- Right ImageView -->
-       
-        </HBox>
-    </center>
-   <left>
-      <ImageView fitHeight="112.0" fitWidth="259.0" pickOnBounds="true" preserveRatio="true" BorderPane.alignment="CENTER">
+<AnchorPane prefHeight="550.0" prefWidth="807.0" stylesheets="@../resources/styles/home.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.controller.HomeController">
+   <children>
+          <Label style="-fx-font-size: 16; -fx-text-fill: #2ecc71;" />
+          <Button fx:id="AdminLoginButton" layoutX="601.0" layoutY="252.0" onAction="#adminLogin" style="-fx-font-size: 14; -fx-background-color: #27ae60; -fx-text-fill: white; -fx-font-weight: bold;" text="Admin Login" />
+          <Button layoutX="586.0" layoutY="157.0" onAction="#userRegistration" style="-fx-font-size: 14; -fx-background-color: #27ae60; -fx-text-fill: white; -fx-font-weight: bold;" text="User Registration" />
+          <Button fx:id="CandidateLoginButton" layoutX="608.0" layoutY="204.0" onAction="#userLogin" style="-fx-font-size: 14; -fx-background-color: #27ae60; -fx-text-fill: white; -fx-font-weight: bold;" text="User Login" />
+      <ImageView fitHeight="239.0" fitWidth="259.0" layoutX="4.0" layoutY="193.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../resources/fxml_images/images.jpg" />
          </image>
       </ImageView>
-   </left>
-   <top>
-          <Label prefHeight="27.0" prefWidth="461.0" style="-fx-font-size: 18; -fx-font-weight: bold; -fx-text-fill: #2ecc71;" text="Welcome to Masathai Citizenship Assessment" BorderPane.alignment="CENTER">
+          <Label layoutX="158.0" layoutY="16.0" prefHeight="27.0" prefWidth="461.0" style="-fx-font-size: 18; -fx-font-weight: bold; -fx-text-fill: #2ecc71;" text="Welcome to Masathai Citizenship Assessment">
          <textFill>
             <LinearGradient endX="1.0" endY="1.0">
                <stops>
@@ -53,6 +39,5 @@
             </LinearGradient>
          </textFill>
       </Label>
-   </top>
-
-</BorderPane>
+   </children>
+</AnchorPane>

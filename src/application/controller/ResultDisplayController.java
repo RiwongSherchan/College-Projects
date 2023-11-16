@@ -15,6 +15,8 @@ import javafx.scene.Scene;
 import javafx.scene.chart.PieChart;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
 
 public class ResultDisplayController {
@@ -28,6 +30,9 @@ public class ResultDisplayController {
 
 	@FXML
 	private Label firstNameLabel;
+	
+	@FXML
+	private ImageView countryFlagImageView;
 
 	@FXML
 	private Label genderLabel;
@@ -55,6 +60,7 @@ public class ResultDisplayController {
 			firstNameLabel.setText("First Name: " + candidate.getFirstName());
 			genderLabel.setText("Gender: " + candidate.getGender());
 			countryLabel.setText("Country: " + candidate.getCountry());
+			updateCountryFlagImage(candidate);
 		}
     	 updatePieChart();
         // Set the resultLabel text with the result
@@ -68,6 +74,15 @@ public class ResultDisplayController {
     public void setscore(int score) {
         this.score = score;
     }
+    
+    private void updateCountryFlagImage(Candidate candidate) {
+        System.out.println(candidate.getCountry());
+		String country = candidate.getCountry().toLowerCase();
+		String imageUrl = String.format("/application/resources/fxml_images/%sflag.jpg", country);
+		Image image = new Image(getClass().getResourceAsStream(imageUrl));
+		countryFlagImageView.setImage(image);
+
+	}
     
     private void updatePieChart() {
         // Extract correct answers and total questions from the result
