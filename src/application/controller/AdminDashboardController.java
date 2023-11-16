@@ -27,6 +27,16 @@ public class AdminDashboardController {
 
 	@FXML
 	private Label countryLabel;
+
+	@FXML
+	private Label scoreLabel;
+
+	@FXML
+	private Label selectedAnswersLabel;
+
+	@FXML
+	private Label correctAnswersLabel;
+
 	@FXML
 	private ComboBox<Candidate> candidatesDropdown;
 
@@ -94,14 +104,86 @@ public class AdminDashboardController {
 		nameLabel.setText("Name: " + candidate.getFirstName() + " " + candidate.getLastName());
 		genderLabel.setText("Gender: " + candidate.getGender());
 		countryLabel.setText("Country: " + candidate.getCountry());
+
+		// Fetch and display the score, selected answers, and correct answers
+		String email = candidate.getEmail();
+		int score = getScoreFromTestResults(email);
+		List<String> selectedAnswers = getSelectedAnswersFromTestResults(email);
+		List<String> correctAnswers = getCorrectAnswers();
+
+		// Display the fetched data
+		scoreLabel.setText("Score: " + score);
+		selectedAnswersLabel.setText("Selected Answers: " + String.join(", ", selectedAnswers));
+		correctAnswersLabel.setText("Correct Answers: " + String.join(", ", correctAnswers));
 	}
 
 	private void clearCandidateDetails() {
 		nameLabel.setText("Name: ");
 		genderLabel.setText("Gender: ");
 		countryLabel.setText("Country: ");
+		scoreLabel.setText("Score: ");
+		selectedAnswersLabel.setText("Selected Answers: ");
+		correctAnswersLabel.setText("Correct Answers: ");
 	}
 
+	private int getScoreFromTestResults(String email) {
+		try (BufferedReader reader = new BufferedReader(new FileReader("test_result.txt"))) {
+			String line;
+			while ((line = reader.readLine()) != null) {
+				String[] parts = line.split(",");
+				String resultEmail = parts[0];
+				if (resultEmail.equals(email)) {
+					// Assuming the score is at index 1 in the result file
+					return Integer.parseInt(parts[1]);
+				}
+			}
+		} catch (IOException | NumberFormatException e) {
+			e.printStackTrace();
+			// Handle the exception (e.g., log it, show an error message)
+		}
+		// Return a default score if no matching email is found
+		return 0;
+	}
+
+	private List<String> getSelectedAnswersFromTestResults(String email) {
+		List<String> selectedAnswers = new ArrayList<>();
+
+		try (BufferedReader reader = new BufferedReader(new FileReader("test_result.txt"))) {
+			String line;
+			while ((line = reader.readLine()) != null) {
+				String[] parts = line.split(",");
+				String resultEmail = parts[0];
+				if (resultEmail.equals(email)) {
+					// Assuming the answers start from index 2 in the result file
+					for (int i = 2; i < parts.length; i++) {
+						selectedAnswers.add(parts[i]);
+					}
+					break; // Break once the matching email is found
+				}
+			}
+		} catch (IOException e) {
+			e.printStackTrace();
+			// Handle the exception (e.g., log it, show an error message)
+		}
+
+		return selectedAnswers;
+	}
+
+	private List<String> getCorrectAnswers() {
+		List<String> correctAnswers = new ArrayList<>();
+
+		try (BufferedReader reader = new BufferedReader(new FileReader("answer_list.txt"))) {
+			String line;
+			while ((line = reader.readLine()) != null) {
+				correctAnswers.add(line);
+			}
+		} catch (IOException e) {
+			e.printStackTrace();
+			// Handle the exception (e.g., log it, show an error message)
+		}
+
+		return correctAnswers;
+	}
 
 	private void showAlert(String message) {
 		Alert alert = new Alert(AlertType.INFORMATION);
