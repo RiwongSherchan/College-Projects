@@ -7,7 +7,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import application.model.Candidate;
-import application.util.SceneLoader;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -148,7 +147,7 @@ public class CandidateRegistrationController {
 
 	private void saveToTextFile(String firstName, String lastName, String email, String gender, String country, String password,
 			String contactNumber) {
-		try (BufferedWriter writer = new BufferedWriter(new FileWriter("Candidate.txt", true))) {
+		try (BufferedWriter writer = new BufferedWriter(new FileWriter("src/Candidate.txt", true))) {
 			// Append the details in comma-separated format
 			writer.write(firstName + "," + lastName + "," + email + "," + gender + "," + country + "," + password + "," + contactNumber
 					+ "\n");

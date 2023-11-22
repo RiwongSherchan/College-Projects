@@ -37,7 +37,7 @@ public class AdminLoginController {
 		String email = emailField.getText();
 		String password = passwordField.getText();
 
-		try (BufferedReader reader = new BufferedReader(new FileReader("Admin.txt"))) {
+		try (BufferedReader reader = new BufferedReader(new FileReader("src/Admin.txt"))) {
 			String line;
 			while ((line = reader.readLine()) != null) {
 				String[] components = line.split(",");

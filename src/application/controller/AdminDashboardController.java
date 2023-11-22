@@ -93,7 +93,7 @@ public class AdminDashboardController {
 	private List<Candidate> getCandidatesFromDataSource() {
 		List<Candidate> candidates = new ArrayList<>();
 
-		try (BufferedReader reader = new BufferedReader(new FileReader("Candidate.txt"))) {
+		try (BufferedReader reader = new BufferedReader(new FileReader("src/Candidate.txt"))) {
 			String line;
 			while ((line = reader.readLine()) != null) {
 				String[] parts = line.split(",");
@@ -116,10 +116,20 @@ public class AdminDashboardController {
 
 		return candidates;
 	}
+	
+	private void clearCandidateDetails() {
+		nameLabel.setText("Name: ");
+		genderLabel.setText("Gender: ");
+		countryLabel.setText("Country: ");
+		scoreLabel.setText("Score: ");
+		selectedAnswersLabel.setText("Selected Answers: ");
+		correctAnswersLabel.setText("Correct Answers: ");
+	}
 
 	@FXML
 	private void openTestResultAnalysis() {
 		// Retrieve the selected candidate from the dropdown
+		
 		Candidate selectedCandidate = candidatesDropdown.getSelectionModel().getSelectedItem();
 
 		if (selectedCandidate == null) {
@@ -128,6 +138,7 @@ public class AdminDashboardController {
 		} else {
 			// Open the test result analysis window for the selected candidate
 			displayCandidateDetails(selectedCandidate);
+			
 		}
 	}
 
@@ -148,17 +159,10 @@ public class AdminDashboardController {
 		correctAnswersLabel.setText("Correct Answers: \n" + String.join("\n", correctAnswers));
 	}
 
-	private void clearCandidateDetails() {
-		nameLabel.setText("Name: ");
-		genderLabel.setText("Gender: ");
-		countryLabel.setText("Country: ");
-		scoreLabel.setText("Score: ");
-		selectedAnswersLabel.setText("Selected Answers: ");
-		correctAnswersLabel.setText("Correct Answers: ");
-	}
+	
 
 	private int getScoreFromTestResults(String email) {
-		try (BufferedReader reader = new BufferedReader(new FileReader("test_result.txt"))) {
+		try (BufferedReader reader = new BufferedReader(new FileReader("src/test_result.txt"))) {
 			String line;
 			while ((line = reader.readLine()) != null) {
 				String[] parts = line.split(",");
@@ -179,7 +183,7 @@ public class AdminDashboardController {
 	private List<String> getSelectedAnswersFromTestResults(String email) {
 		List<String> selectedAnswers = new ArrayList<>();
 
-		try (BufferedReader reader = new BufferedReader(new FileReader("test_result.txt"))) {
+		try (BufferedReader reader = new BufferedReader(new FileReader("src/test_result.txt"))) {
 			String line;
 			while ((line = reader.readLine()) != null) {
 				String[] parts = line.split(",");
@@ -203,7 +207,7 @@ public class AdminDashboardController {
 	private List<String> getCorrectAnswers() {
 		List<String> correctAnswers = new ArrayList<>();
 
-		try (BufferedReader reader = new BufferedReader(new FileReader("answer_list.txt"))) {
+		try (BufferedReader reader = new BufferedReader(new FileReader("src/answer_list.txt"))) {
 			String line;
 			while ((line = reader.readLine()) != null) {
 				correctAnswers.add(line);

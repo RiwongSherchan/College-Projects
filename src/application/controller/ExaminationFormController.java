@@ -277,7 +277,7 @@ public class ExaminationFormController {
 	}
 	
 	private void saveTestResult(String userEmail, int score, List<String> selectedOptions) {
-	    try (BufferedWriter writer = new BufferedWriter(new FileWriter("test_result.txt", true))) {
+	    try (BufferedWriter writer = new BufferedWriter(new FileWriter("src/test_result.txt", true))) {
 	        // Append the details in comma-separated format
 	        writer.write(userEmail + "," + score + "," + String.join(",", selectedOptions) + "\n");
 	        System.out.println("Test result saved to test_result.txt");

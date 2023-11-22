@@ -41,7 +41,7 @@ public class CandidateLoginController {
 		String email = emailField.getText();
 		String password = passwordField.getText();
 
-		try (BufferedReader reader = new BufferedReader(new FileReader("Candidate.txt"))) {
+		try (BufferedReader reader = new BufferedReader(new FileReader("src/Candidate.txt"))) {
 			String line;
 			boolean authenticationSuccessful = false;
 			while ((line = reader.readLine()) != null) {

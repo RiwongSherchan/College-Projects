@@ -5,7 +5,6 @@ import java.io.FileReader;
 import java.io.IOException;
 
 import application.model.Candidate;
-import application.util.SceneLoader;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -118,7 +117,7 @@ public class CandidateDashboardController {
 	}
 
 	private int fetchScoreFromTestResults() {
-		try (BufferedReader reader = new BufferedReader(new FileReader("test_result.txt"))) {
+		try (BufferedReader reader = new BufferedReader(new FileReader("src/test_result.txt"))) {
 			String line;
 			while ((line = reader.readLine()) != null) {
 				String[] parts = line.split(",");
