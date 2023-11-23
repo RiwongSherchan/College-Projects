@@ -13,7 +13,9 @@ import javafx.scene.control.ToggleGroup;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
-
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
+import java.io.File;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.FileReader;
@@ -29,7 +31,6 @@ import javafx.animation.Timeline;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.util.Duration;
-
 
 import application.model.Candidate;
 
@@ -49,7 +50,7 @@ public class ExaminationFormController {
 
 	@FXML
 	private RadioButton optionDRadioButton;
-	
+
 	@FXML
 	private ImageView countryFlagImageView;
 
@@ -82,7 +83,22 @@ public class ExaminationFormController {
 
 	@FXML
 	private Label resultLabel;
-	
+
+	@FXML
+	private ImageView question_image;
+
+	@FXML
+	private ImageView optionAImageView;
+
+	@FXML
+	private ImageView optionBImageView;
+
+	@FXML
+	private ImageView optionCImageView;
+
+	@FXML
+	private ImageView optionDImageView;
+
 	@FXML
 	private Label currentQuestionLabel;
 
@@ -90,8 +106,9 @@ public class ExaminationFormController {
 	private List<String> questionsWithOptions = new ArrayList<>();
 	private List<String> correctAnswers = new ArrayList<>();
 	private int currentQuestionIndex = 0;
-	private int secondsRemaining = 300; // 5 minutes
+	private int secondsRemaining = 240; // 5 minutes
 	private Timeline timer;
+	private boolean timerFinished = false;
 
 	private Candidate candidate;
 
@@ -104,7 +121,7 @@ public class ExaminationFormController {
 		updateQuestion();
 		loadCorrectAnswers();
 		initializeTimer();
-		 updateCurrentQuestionLabel();
+		updateCurrentQuestionLabel();
 
 		if (candidate != null) {
 			firstNameLabel.setText("First Name: " + candidate.getFirstName());
@@ -119,53 +136,85 @@ public class ExaminationFormController {
 		optionCRadioButton.setToggleGroup(toggleGroup);
 		optionDRadioButton.setToggleGroup(toggleGroup);
 
+		optionAImageView.setVisible(false);
+		optionBImageView.setVisible(false);
+		optionCImageView.setVisible(false);
+		optionDImageView.setVisible(false);
+		question_image.setVisible(false);
+
 		// Initially, set the Submit button to be invisible
 		submitButton.setVisible(false);
 
 	}
-	
+
+	private void loadOptionImage(ImageView imageView, String imageName) {
+		String imageUrl = String.format("/application/resources/fxml_images/%s", imageName);
+		Image image = new Image(getClass().getResourceAsStream(imageUrl));
+		imageView.setImage(image);
+	}
+
 	private void updateCountryFlagImage(Candidate candidate) {
-        System.out.println(candidate.getCountry());
+		System.out.println(candidate.getCountry());
 		String country = candidate.getCountry().toLowerCase();
 		String imageUrl = String.format("/application/resources/fxml_images/%sflag.jpg", country);
 		Image image = new Image(getClass().getResourceAsStream(imageUrl));
 		countryFlagImageView.setImage(image);
 
 	}
-	
+
 	private void updateCurrentQuestionLabel() {
-	    currentQuestionLabel.setText("Current Question: " + (currentQuestionIndex + 1));
+		currentQuestionLabel.setText("Current Question: " + (currentQuestionIndex + 1));
+	}
+
+	private void initializeTimer() {
+		timer = new Timeline(new KeyFrame(Duration.seconds(2), new EventHandler<ActionEvent>() {
+			@Override
+			public void handle(ActionEvent event) {
+				
+				if (secondsRemaining > 0) {
+					secondsRemaining = secondsRemaining - 1;
+					updateTimerLabel();
+				} else if (secondsRemaining == 0 && !timerFinished) {
+	                timer.stop();
+	                timerFinished = true; // Set the flag to true
+
+	                handleTimerFinish();
+				}
+				
+				if (secondsRemaining == 180) { // 4 minutes remaining
+                    playAudioWarning("3M_Remaining.mp3");
+                } else if (secondsRemaining == 60) { // 3 minutes remaining
+                    playAudioWarning("1M_Remaining.mp3");
+                }
+			}
+		}));
+
+		timer.setCycleCount(Timeline.INDEFINITE);
+		timer.play();
 	}
 	
-	private void initializeTimer() {
-	    timer = new Timeline(
-	            new KeyFrame(Duration.seconds(1), new EventHandler<ActionEvent>() {
-	                @Override
-	                public void handle(ActionEvent event) {
-	                    updateTimerLabel();
-	                    if (secondsRemaining <= 0) {
-	                        timer.stop();
-	                        handleTimerFinish();
-	                    } else {
-	                        secondsRemaining--;
-	                    }
-	                }
-	            })
-	    );
-
-	    timer.setCycleCount(Timeline.INDEFINITE);
-	    timer.play();
+	private void playAudioWarning(String audioFileName) {
+	    try {
+	        String audioPath = "/application/resources/audio/" + audioFileName;
+	        Media media = new Media(getClass().getResource(audioPath).toString());
+	        MediaPlayer mediaPlayer = new MediaPlayer(media);
+	        mediaPlayer.play();
+	    } catch (Exception e) {
+	        e.printStackTrace(); // Handle the exception appropriately
+	    }
 	}
 
 	private void updateTimerLabel() {
-	    int minutes = secondsRemaining / 60;
-	    int seconds = secondsRemaining % 60;
-	    timerLabel.setText(String.format("Time Remaining: %02d:%02d", minutes, seconds));
+		int minutes = secondsRemaining / 60;
+		int seconds = secondsRemaining % 60;
+		System.out.println(minutes + " : "  + seconds);
+		timerLabel.setText(String.format("Time Remaining: %02d:%02d", minutes, seconds));
 	}
 
 	private void handleTimerFinish() {
-	    // Perform actions when the timer finishes (e.g., submit the form)
-	    submitButtonClicked();
+		
+		// Perform actions when the timer finishes (e.g., submit the form)
+		submitButtonClicked();
 	}
 
 	private void loadQuestionsWithOptions() {
@@ -193,9 +242,49 @@ public class ExaminationFormController {
 			optionCRadioButton.setText(parts[3]);
 			optionDRadioButton.setText(parts[4]);
 
-			if (currentQuestionIndex == 20) {
+			if (currentQuestionIndex == 19) {
 				submitButton.setVisible(true);
 
+			}
+			;
+
+			if (currentQuestionIndex == 14) {
+				// Show image views for options
+				optionAImageView.setVisible(true);
+				optionBImageView.setVisible(true);
+				optionCImageView.setVisible(true);
+				optionDImageView.setVisible(true);
+
+				// Load and set images for options
+				loadOptionImage(optionAImageView, "elephant.jpg");
+				loadOptionImage(optionBImageView, "panda.jpg");
+				loadOptionImage(optionCImageView, "tiger.jpg");
+				loadOptionImage(optionDImageView, "orangutan.jpg");
+			} else if (currentQuestionIndex == 6) {
+				// Show image views for options
+				optionAImageView.setVisible(true);
+				optionBImageView.setVisible(true);
+				optionCImageView.setVisible(true);
+				optionDImageView.setVisible(true);
+
+				// Load and set images for options
+				loadOptionImage(optionAImageView, "Petronas Twin Towers.jpg");
+				loadOptionImage(optionBImageView, "Marina Bay Sands.jpg");
+				loadOptionImage(optionCImageView, "Wat Arun.jpg");
+				loadOptionImage(optionDImageView, "kuala lumpur tower.jpg");
+			} else if (currentQuestionIndex == 19) {
+
+				question_image.setVisible(true);
+				loadOptionImage(question_image, "Nasi Lemak.jpg");
+			}
+
+			else {
+				// Hide image views for other questions
+				optionAImageView.setVisible(false);
+				optionBImageView.setVisible(false);
+				optionCImageView.setVisible(false);
+				optionDImageView.setVisible(false);
+				question_image.setVisible(false);
 			}
 		}
 	}
@@ -217,10 +306,11 @@ public class ExaminationFormController {
 		// Disable the "Next" button after reaching question number 20
 		if (currentQuestionIndex >= 20) {
 			nextButton.setDisable(true);
+			
 		}
 
 		updateQuestion();
-		 updateCurrentQuestionLabel();
+		updateCurrentQuestionLabel();
 	}
 
 	@FXML
@@ -233,7 +323,7 @@ public class ExaminationFormController {
 			nextButton.setDisable(false);
 
 			updateQuestion();
-			 updateCurrentQuestionLabel();
+			updateCurrentQuestionLabel();
 
 			// Remove the last selected option when going back
 			if (!selectedOptions.isEmpty()) {
@@ -269,23 +359,24 @@ public class ExaminationFormController {
 		// Print or process the user's score
 		System.out.println("User's Score: " + score);
 		saveTestResult(candidate.getEmail(), score, selectedOptions);
+		
 		timer.stop();
+		
 
-		openResultDisplay(result,score);
+		openResultDisplay(result, score);
 
 		// You can add further logic for processing the submitted answers
 	}
-	
-	private void saveTestResult(String userEmail, int score, List<String> selectedOptions) {
-	    try (BufferedWriter writer = new BufferedWriter(new FileWriter("src/test_result.txt", true))) {
-	        // Append the details in comma-separated format
-	        writer.write(userEmail + "," + score + "," + String.join(",", selectedOptions) + "\n");
-	        System.out.println("Test result saved to test_result.txt");
-	    } catch (IOException e) {
-	        e.printStackTrace();
-	    }
-	}
 
+	private void saveTestResult(String userEmail, int score, List<String> selectedOptions) {
+		try (BufferedWriter writer = new BufferedWriter(new FileWriter("src/test_result.txt", true))) {
+			// Append the details in comma-separated format
+			writer.write(userEmail + "," + score + "," + String.join(",", selectedOptions) + "\n");
+			System.out.println("Test result saved to test_result.txt");
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
 
 	private void loadCorrectAnswers() {
 		try {
@@ -318,12 +409,10 @@ public class ExaminationFormController {
 
 			// Initialize the controller
 			controller.initialize();
-			
-			
+
 			// Close the current stage
-	        Stage currentStage = (Stage) submitButton.getScene().getWindow();
-	        currentStage.close();
-	        
+			Stage currentStage = (Stage) submitButton.getScene().getWindow();
+			currentStage.close();
 
 			Stage stage = new Stage();
 			stage.setTitle("Result Display");
@@ -335,7 +424,5 @@ public class ExaminationFormController {
 	}
 
 	// Existing code...
-
-
 
 }

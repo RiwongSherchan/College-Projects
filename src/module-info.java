@@ -3,6 +3,7 @@ module CitizenshipAssessmentSystem {
     requires javafx.fxml;
 	requires javafx.graphics;
 	requires javafx.base;
+	requires javafx.media;
 
     opens application to javafx.fxml;
     opens application.controller to javafx.fxml;

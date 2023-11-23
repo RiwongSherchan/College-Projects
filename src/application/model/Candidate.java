@@ -9,6 +9,7 @@ public class Candidate {
     private String country;
     private String password;
     private String contactNumber;
+    private String age;
 
     // Constructors, getters, and setters
 
@@ -36,6 +37,19 @@ public class Candidate {
 		this.country = country;
 		this.password = password;
 		this.contactNumber = contactNumber;
+	}
+    
+    public Candidate(String firstName, String lastName, String email, String gender, String country, String password,
+			String contactNumber,String age) {
+		super();
+		this.firstName = firstName;
+		this.lastName = lastName;
+		this.email = email;
+		this.gender = gender;
+		this.country = country;
+		this.password = password;
+		this.contactNumber = contactNumber;
+		this.age = age;
 	}
 
 	public Candidate(String firstName, String lastName, String country) {
@@ -95,4 +109,12 @@ public class Candidate {
     public void setContactNumber(String contactNumber) {
         this.contactNumber = contactNumber;
     }
+
+	public String getAge() {
+		return age;
+	}
+
+	public void setAge(String age) {
+		this.age = age;
+	}
 }

@@ -1,5 +1,2 @@
-123,123,123,Male,Thailand,123,123
-12,12,12,Male,Thailand,12,12
-dorje,hyper,asd@gmail.com,Male,Malaysia,123,1234,4,4,Male,Malaysia,4,4
-5,5,5,Female,Malaysia,5,5
-Hello,Word,HelloWord@println.com,Male,Malaysia,noice,98222222222
+123,123,123,Female,Malaysia,123,123,0
+asd,asd,asd,Male,Thailand,asd,asd,7

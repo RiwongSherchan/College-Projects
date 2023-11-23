@@ -5,6 +5,8 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.time.LocalDate;
+import java.time.Period;
 
 import application.model.Candidate;
 import javafx.event.ActionEvent;
@@ -13,6 +15,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.DatePicker;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
@@ -53,9 +56,12 @@ public class CandidateRegistrationController {
 
 	@FXML
 	private Button CancelButton;
-	
+
 	@FXML
 	private TextField passwordField;
+
+	@FXML
+	private DatePicker datePicker;
 
 	private List<Candidate> candidates = new ArrayList<>();
 
@@ -70,8 +76,6 @@ public class CandidateRegistrationController {
 				: malaysiaRadioButton.isSelected() ? "Malaysia" : "Singapore";
 		String password = passwordField.getText();
 		String contactNumber = contactNumberField.getText();
-		
-		
 
 		System.out.println("First Name: " + firstName);
 		System.out.println("Last Name: " + lastName);
@@ -80,10 +84,25 @@ public class CandidateRegistrationController {
 		System.out.println("Country: " + country);
 		System.out.println("Contact Number: " + contactNumber);
 
-		Candidate NewCandidate = new Candidate(firstName, lastName, email, gender, country, password,contactNumber);
+		LocalDate dob = datePicker.getValue();
+
+		LocalDate currentDate = LocalDate.now();
+
+		// Calculate the period between the date of birth and the current date
+		Period period = Period.between(dob, currentDate);
+
+		// Extract the years from the period
+		int age_number = period.getYears();
+		String age = String.valueOf(age_number);
+
+		// Use the age in years as needed in your registration logic
+		System.out.println("Age: " + age);
+
+		Candidate NewCandidate = new Candidate(firstName, lastName, email, gender, country, password, contactNumber,
+				age);
 		candidates.add(NewCandidate);
 
-		saveToTextFile(firstName, lastName, email, gender, country, password, contactNumber);
+		saveToTextFile(firstName, lastName, email, gender, country, password, contactNumber,age);
 
 		Stage stage = (Stage) registerButton.getScene().getWindow();
 		stage.close();
@@ -145,12 +164,12 @@ public class CandidateRegistrationController {
 
 	}
 
-	private void saveToTextFile(String firstName, String lastName, String email, String gender, String country, String password,
-			String contactNumber) {
+	private void saveToTextFile(String firstName, String lastName, String email, String gender, String country,
+			String password, String contactNumber, String age) {
 		try (BufferedWriter writer = new BufferedWriter(new FileWriter("src/Candidate.txt", true))) {
 			// Append the details in comma-separated format
-			writer.write(firstName + "," + lastName + "," + email + "," + gender + "," + country + "," + password + "," + contactNumber
-					+ "\n");
+			writer.write(firstName + "," + lastName + "," + email + "," + gender + "," + country + "," + password + ","
+					+ contactNumber + "," + age + "\n");
 			System.out.println("Details saved to candidates.txt");
 		} catch (IOException e) {
 			e.printStackTrace();

@@ -7,28 +7,33 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="590.0" prefWidth="724.0" stylesheets="@../resources/styles/candidateDashboard.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.controller.CandidateDashboardController">
+<AnchorPane prefHeight="700" prefWidth="1000" stylesheets="@../resources/styles/candidateDashboard.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.controller.CandidateDashboardController">
    <children>
    
-      	<Label layoutX="182.0" layoutY="33.0" prefHeight="111.0" prefWidth="388.0" text="            Candidate Dashboard" textAlignment="CENTER" textFill="#3e1a1a">
+      	<Label layoutX="474.0" prefHeight="111.0" prefWidth="388.0" text="            Candidate Dashboard" textAlignment="CENTER" textFill="#3e1a1a">
    		<font>
    			<javafx.scene.text.Font name="Berlin Sans FB Demi Bold" size="29.0" />
    		</font>
    	</Label>
    
       	<!-- Display Candidate Details -->
-   	<Label fx:id="firstNameLabel" layoutX="387.0" layoutY="149.0" prefHeight="27.0" prefWidth="222.0" text="s" />
-   	<Label fx:id="lastNameLabel" layoutX="387.0" layoutY="189.0" prefHeight="27.0" prefWidth="221.0" text="s" />
-   	<Label fx:id="genderLabel" layoutX="387.0" layoutY="228.0" prefHeight="27.0" prefWidth="222.0" text="s" />
+   	<Label fx:id="firstNameLabel" layoutX="705.0" layoutY="135.0" prefHeight="27.0" prefWidth="222.0" text="s" />
+   	<Label fx:id="lastNameLabel" layoutX="705.0" layoutY="168.0" prefHeight="27.0" prefWidth="221.0" text="s" />
+   	<Label fx:id="genderLabel" layoutX="705.0" layoutY="208.0" prefHeight="27.0" prefWidth="222.0" text="s" />
    
       	<!-- Buttons for Examination, Profile Settings, and Test Results -->
-   	<Button fx:id="openExamination" layoutX="40.0" layoutY="149.0" onAction="#openExamination" prefHeight="79.0" prefWidth="210.0" text="Examination" />
-   	<Button fx:id="LogoutButton" layoutX="40.0" layoutY="411.0" onAction="#logout" prefHeight="42.0" prefWidth="210.0" text="Logout" />
-      <Button fx:id="ViewTest" layoutX="40.0" layoutY="260.0" mnemonicParsing="false" onAction="#ViewTestReport" prefHeight="42.0" prefWidth="210.0" text="View Test Report" />
-      <ImageView fx:id="countryFlagImageView" fitHeight="204.0" fitWidth="259.0" layoutX="395.0" layoutY="281.0" opacity="0.89" pickOnBounds="true" preserveRatio="true">
+   	<Button fx:id="openExamination" layoutX="428.0" layoutY="367.0" onAction="#openExamination" prefHeight="82.0" prefWidth="222.0" text="Examination" />
+   	<Button fx:id="LogoutButton" layoutX="567.0" layoutY="593.0" onAction="#logout" prefHeight="42.0" prefWidth="210.0" text="Logout" />
+      <Button fx:id="ViewTest" layoutX="695.0" layoutY="371.0" mnemonicParsing="false" onAction="#ViewTestReport" prefHeight="82.0" prefWidth="222.0" text="View Test Report" />
+      <ImageView fx:id="countryFlagImageView" fitHeight="132.0" fitWidth="266.0" layoutX="406.0" layoutY="129.0" opacity="0.89" pickOnBounds="true">
          <image>
             <Image url="@../resources/fxml_images/singapourflag.jpg" />
          </image></ImageView>
+      <ImageView fitHeight="707.0" fitWidth="375.0" layoutX="-4.0" layoutY="-1.0" pickOnBounds="true">
+         <image>
+            <Image url="@../resources/fxml_images/home%20image.png" />
+         </image>
+      </ImageView>
    
    </children>
 </AnchorPane>

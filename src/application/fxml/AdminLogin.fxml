@@ -6,23 +6,29 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.PasswordField?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-
-<AnchorPane prefHeight="457.0" prefWidth="658.0" stylesheets="@../resources/styles/adminLogin.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.controller.AdminLoginController">
+<AnchorPane prefHeight="700" prefWidth="1000" stylesheets="@../resources/styles/adminLogin.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.controller.AdminLoginController">
    <children>
    
-      	<Label styleClass="text label-title" layoutX="164.0" layoutY="45.0" prefHeight="46.0" prefWidth="286.0" text="Admin Login">
+      	<Label layoutX="568.0" layoutY="99.0" prefHeight="46.0" prefWidth="286.0" styleClass="text label-title" text="Admin Login">
          <font>
             <Font size="24.0" />
          </font>
       </Label>
    
-      	<TextField styleClass="text text-field" fx:id="emailField" layoutX="150.0" layoutY="168.0" prefHeight="39.0" prefWidth="314.0" promptText="Email" />
-   	<PasswordField styleClass="text text-field" fx:id="passwordField" layoutX="150.0" layoutY="229.0" prefHeight="46.0" prefWidth="314.0" promptText="Password" />
+      	<TextField fx:id="emailField" layoutX="507.0" layoutY="197.0" prefHeight="62.0" prefWidth="366.0" promptText="Email" styleClass="text text-field" />
+   	<PasswordField fx:id="passwordField" layoutX="507.0" layoutY="274.0" prefHeight="62.0" prefWidth="366.0" promptText="Password" styleClass="text text-field" />
    
-      	<Button styleClass="button" fx:id="LoginButton" layoutX="113.0" layoutY="291.0" onAction="#loginButtonClicked" prefHeight="86.0" prefWidth="158.0" text="Login" />
-   	<Button styleClass="button" fx:id="CancelButton" layoutX="361.0" layoutY="295.0" onAction="#cancelButtonClicked" prefHeight="78.0" prefWidth="158.0" text="Cancel" />
+      	<Button fx:id="LoginButton" layoutX="507.0" layoutY="357.0" onAction="#loginButtonClicked" prefHeight="62.0" prefWidth="142.0" styleClass="button" text="Login" />
+   	<Button fx:id="CancelButton" layoutX="757.0" layoutY="357.0" onAction="#cancelButtonClicked" prefHeight="62.0" prefWidth="154.0" styleClass="button" text="Cancel" />
+      <ImageView fitHeight="728.0" fitWidth="490.0" layoutX="-3.0" layoutY="-3.0" pickOnBounds="true">
+         <image>
+            <Image url="@../resources/fxml_images/home%20image.png" />
+         </image>
+      </ImageView>
    </children>
 </AnchorPane>
