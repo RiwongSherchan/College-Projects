@@ -2,3 +2,7 @@
 123,9,Kuala Lumpur,Mekong River,Malay,Satay,Songkran,Ringgit,Petronas Towers,Orchid,Borneo,Rabindranath Tagore,Kuala Lumpur,Hula,Malaysia,Mount Kinabalu,Elephant,Buddhism,Strait of Hormuz,Hanbok,Chatuchak Weekend Market,Malaysia
 asd,5,Bangkok,Chao Phraya River,Thai,Pho,Deepavali,Baht,Marina Bay Sands,Hibiscus,Java,Rumi,Bangkok,Odissi,Thailand,Doi Inthanon,Panda,Islam,Strait of Gibraltar,Cheongsam,Petaling Street Market,Thailand
 123,6,Singapore,Singapore River,English,Laksa,Chinese New Year,Dollar,Wat Arun,Jasmine,Sumatra,Sunthorn Phu,Singapore,Khon,Singapore,Mount Ophir,Tiger,Hinduism,Strait of Malacca,Sarong Kebaya,Bugis Street Market,Singapore
+asd,5,Singapore,Singapore River,English,Pho,Deepavali,Baht,Kuala Lumpur Tower,Lotus,Sulawesi,Sunthorn Phu,Singapore,Khon,Singapore,Doi Inthanon,Panda,Islam,Strait of Gibraltar,Batik,Sukawati Art Market,Indonesia
+123,6,Singapore,Singapore River,English,Laksa,Chinese New Year,Dollar,Wat Arun,Jasmine,Sumatra,Sunthorn Phu,Singapore,Khon,Singapore,Mount Ophir,Tiger,Hinduism,Strait of Malacca,Sarong Kebaya,Bugis Street Market,Singapore
+123,0,Singapore,Singapore River,Mandarin,Pad Thai,Hari Raya Aidilfitri,Rupiah,Kuala Lumpur Tower,Lotus,Sulawesi,Pablo Neruda,Jakarta,Bharatanatyam,Indonesia,Mount Bromo,Orangutan,Hinduism,Strait of Gibraltar,Cheongsam,Petaling Street Market,Thailand
+123,6,Singapore,Singapore River,English,Laksa,Chinese New Year,Dollar,Wat Arun,Jasmine,Sumatra,Sunthorn Phu,Singapore,Khon,Singapore,Mount Ophir,Tiger,Hinduism,Strait of Malacca,Sarong Kebaya,Bugis Street Market,Singapore

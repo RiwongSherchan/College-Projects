@@ -22,7 +22,7 @@
       			<Label layoutX="29.0" prefHeight="27.0" prefWidth="254.0" style="-fx-font-size: 18; -fx-font-weight: bold;" text="Admin Dashboard" textAlignment="RIGHT" />
          </children>
       </AnchorPane>
-		<AnchorPane fx:id="candidateDetailsPane" layoutX="286.0" prefHeight="556.0" prefWidth="668.0">
+		<AnchorPane fx:id="candidateDetailsPane" layoutX="286.0" prefHeight="666.0" prefWidth="668.0">
 			<children>
 				<HBox layoutX="9.0" layoutY="29.0" prefHeight="27.0" prefWidth="590.0" spacing="5.0">
 					<children>
@@ -33,11 +33,13 @@
 				</HBox>
 				<!-- Added labels for displaying the score, selected answers, and correct 
 					answers -->
-				<Label fx:id="scoreLabel" layoutX="22.0" layoutY="52.0" text="Score: " />
-				<Label fx:id="selectedAnswersLabel" layoutX="232.0" layoutY="78.0" text="Selected Answers: " />
-				<Label fx:id="correctAnswersLabel" layoutX="425.0" layoutY="78.0" text="Correct Answers: " />
+				<Label fx:id="scoreLabel" layoutX="11.0" layoutY="131.0" text="Score: " />
+				<Label fx:id="selectedAnswersLabel" layoutX="254.0" layoutY="160.0" text="Selected Answers: " />
+				<Label fx:id="correctAnswersLabel" layoutX="447.0" layoutY="160.0" text="Correct Answers: " />
 				<Label layoutX="166.0" layoutY="1.0" style="-fx-font-size: 16; -fx-font-weight: bold;" text="Candidate Details" />
-				<Label fx:id="QuestionLabel" layoutX="7.0" layoutY="78.0" text="Question " />
+				<Label fx:id="QuestionLabel" layoutX="29.0" layoutY="160.0" text="Question " />
+            <Label fx:id="contactNumberLabel" layoutX="11.0" layoutY="66.0" text="contact number:" />
+            <Label fx:id="ageLabel" layoutX="11.0" layoutY="96.0" prefHeight="18.0" prefWidth="36.0" text="age:" />
 			</children>
 		</AnchorPane>
 		<Button fx:id="LogoutButton" layoutX="25.0" layoutY="615.0" mnemonicParsing="false" onAction="#logout" prefHeight="26.0" prefWidth="144.0" text="Logout" />

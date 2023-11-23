@@ -13,7 +13,6 @@ import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
-import java.util.Arrays;
 import java.util.DoubleSummaryStatistics;
 import java.util.IntSummaryStatistics;
 import java.util.List;
@@ -22,9 +21,7 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.IntSummaryStatistics;
-import java.util.List;
-import java.util.stream.Collectors;
+
 
 public class AdminDashboardController {
 
@@ -77,6 +74,12 @@ public class AdminDashboardController {
 	private Label singaporeLabel;
 
 	@FXML
+	private Label contactNumberLabel;
+
+	@FXML
+	private Label ageLabel;
+
+	@FXML
 	private Button statButton;
 
 	public void initialize() {
@@ -87,6 +90,7 @@ public class AdminDashboardController {
 		displayStatistics();
 	}
 
+	// Display question numbers dynamically on the candidate details pane
 	private void displayQuestionNumbers() {
 		int totalQuestions = 20;
 		int questionNumber = 1; // Starting question number
@@ -95,8 +99,9 @@ public class AdminDashboardController {
 		while (questionNumber <= totalQuestions) {
 			// Create labels for question details
 			Label questionLabel = new Label("Question " + questionNumber + ":");
-			questionLabel.setLayoutX(7.0); // Adjust the layout as needed
-			questionLabel.setLayoutY(78.0 + (questionNumber * 20)); // Adjust the layout as needed
+
+			questionLabel.setLayoutX(29.0); // Adjust the layout as needed
+			questionLabel.setLayoutY(170.0 + (questionNumber * 20)); // Adjust the layout as needed
 
 			// Add the labels to your layout (replace with your specific layout)
 			candidateDetailsPane.getChildren().add(questionLabel);
@@ -105,6 +110,7 @@ public class AdminDashboardController {
 		}
 	}
 
+	// Display statistics (e.g., pass/fail, gender distribution) on labels
 	private void displayStatistics() {
 		List<Candidate> candidates = getCandidatesFromDataSource();
 
@@ -129,70 +135,62 @@ public class AdminDashboardController {
 		passedLabel.setText("Passed: " + passedCount);
 		failedLabel.setText("Failed: " + failedCount);
 		genderDistributionLabel
-				.setText("Gender Distribution: " + "\n" + "Male - " + maleCount + "\n" + ", Female - " + femaleCount);
+				.setText("Gender Distribution: " + "\n" + "Male: " + maleCount + "\n" + "Female:" + femaleCount);
 		thailandLabel.setText("From Thailand: " + thailandCount);
 		malaysiaLabel.setText("From Malaysia: " + malaysiaCount);
 		singaporeLabel.setText("From Singapore: " + singaporeCount);
 	}
 
-	 @FXML
-	    private void showStatisticalAnalysis() {
-	        List<Candidate> candidates = getCandidatesFromDataSource();
+	// Handler for the "Show Statistical Analysis" button
+	@FXML
+	private void showStatisticalAnalysis() {
+		List<Candidate> candidates = getCandidatesFromDataSource();
 
-	        // Extract numeric values for analysis
-	        List<Integer> ageValues = candidates.stream().map(candidate -> Integer.parseInt(candidate.getAge())).collect(Collectors.toList());
+		// Extract numeric values for analysis
+		List<Integer> ageValues = candidates.stream().map(candidate -> Integer.parseInt(candidate.getAge()))
+				.collect(Collectors.toList());
 
-	        // Calculate statistics for age
-	        IntSummaryStatistics ageStats = ageValues.stream().mapToInt(Integer::intValue).summaryStatistics();
+		// Calculate statistics for age
+		IntSummaryStatistics ageStats = ageValues.stream().mapToInt(Integer::intValue).summaryStatistics();
 
-	        // Calculate statistics for score
-	        List<Integer> scoreValues = candidates.stream().map(candidate -> getScoreFromTestResults(candidate.getEmail())).collect(Collectors.toList());
-	        DoubleSummaryStatistics scoreStats = scoreValues.stream().mapToDouble(Integer::doubleValue).summaryStatistics();
+		// Calculate statistics for score
+		List<Integer> scoreValues = candidates.stream().map(candidate -> getScoreFromTestResults(candidate.getEmail()))
+				.collect(Collectors.toList());
+		DoubleSummaryStatistics scoreStats = scoreValues.stream().mapToDouble(Integer::doubleValue).summaryStatistics();
 
-	        // Display the statistical analysis in an alert
-	        Alert alert = new Alert(AlertType.INFORMATION);
-	        alert.setTitle("Statistical Analysis");
-	        alert.setHeaderText(null);
-	        alert.setContentText(
-	                getStatisticalSummary("Candidates", candidates.size()) +
-	                getStatisticalSummary("Male", countGender(candidates, "Male")) +
-	                getStatisticalSummary("Female", countGender(candidates, "Female")) +
-	                getStatisticalSummary("Age", ageStats) +
-	                getStatisticalSummary("Score", scoreStats));
+		// Display the statistical analysis in an alert
+		Alert alert = new Alert(AlertType.INFORMATION);
+		alert.setTitle("Statistical Analysis");
+		alert.setHeaderText(null);
+		alert.setContentText(getStatisticalSummary("Candidates", candidates.size())
+				+ getStatisticalSummary("Male", countGender(candidates, "Male"))
+				+ getStatisticalSummary("Female", countGender(candidates, "Female"))
+				+ getStatisticalSummary("Age", ageStats) + getStatisticalSummary("Score", scoreStats));
 
-	        alert.showAndWait();
-	    }
+		alert.showAndWait();
+	}
 
-	    private String getStatisticalSummary(String variable, Object value) {
-	        return String.format("%-10s: %s\n", variable, value.toString());
-	    }
+	// Format and retrieve statistical summary for a variable and its value
 
-	    private long countGender(List<Candidate> candidates, String gender) {
-	        return candidates.stream().filter(candidate -> gender.equalsIgnoreCase(candidate.getGender())).count();
-	    }
+	private String getStatisticalSummary(String variable, Object value) {
+		return String.format("%-10s: %s\n", variable, value.toString());
+	}
 
-	    private double calculateStandardDeviation(List<Integer> values) {
-	        double mean = values.stream().mapToDouble(Integer::doubleValue).average().orElse(0.0);
-	        double sum = values.stream().mapToDouble(value -> Math.pow(value - mean, 2)).sum();
-	        double variance = sum / (values.size() - 1);
-	        return Math.sqrt(variance);
-	    }
+	// Count the number of candidates with a specific gender
+	private long countGender(List<Candidate> candidates, String gender) {
+		return candidates.stream().filter(candidate -> gender.equalsIgnoreCase(candidate.getGender())).count();
+	}
 
-	
-
+	// Populate candidates dropdown with Candidate objects from a data source
 	private void populateCandidatesDropdown() {
-		// Clear existing items
+
 		candidatesDropdown.getItems().clear();
 
-		// Add logic to read candidate data from the data source (e.g., Candidate.txt)
-		// and populate the candidatesDropdown with Candidate objects
-
-		// For example:
 		List<Candidate> candidates = getCandidatesFromDataSource();
 		candidatesDropdown.getItems().addAll(candidates);
 	}
 
-	// Dummy method to get a list of Candidate objects (replace with actual logic)
+	// Read Candidate objects from a data source (e.g., Candidate.txt)
 	private List<Candidate> getCandidatesFromDataSource() {
 		List<Candidate> candidates = new ArrayList<>();
 
@@ -221,6 +219,7 @@ public class AdminDashboardController {
 		return candidates;
 	}
 
+	// Clear candidate details labels
 	private void clearCandidateDetails() {
 		nameLabel.setText("Name: ");
 		genderLabel.setText("Gender: ");
@@ -230,6 +229,7 @@ public class AdminDashboardController {
 		correctAnswersLabel.setText("Correct Answers: ");
 	}
 
+	// Handler for the "Open Test Result Analysis" button
 	@FXML
 	private void openTestResultAnalysis() {
 		// Retrieve the selected candidate from the dropdown
@@ -250,6 +250,9 @@ public class AdminDashboardController {
 		nameLabel.setText("Name: " + candidate.getFirstName() + " " + candidate.getLastName());
 		genderLabel.setText("Gender: " + candidate.getGender());
 		countryLabel.setText("Country: " + candidate.getCountry());
+		// Add these lines to display age and contact number
+		ageLabel.setText("Age: " + candidate.getAge());
+		contactNumberLabel.setText("Contact Number: " + candidate.getContactNumber());
 
 		// Fetch and display the score, selected answers, and correct answers
 		String email = candidate.getEmail();

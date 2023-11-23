@@ -109,6 +109,9 @@ public class ExaminationFormController {
 	private int secondsRemaining = 240; // 5 minutes
 	private Timeline timer;
 	private boolean timerFinished = false;
+	
+	
+
 
 	private Candidate candidate;
 
@@ -122,6 +125,7 @@ public class ExaminationFormController {
 		loadCorrectAnswers();
 		initializeTimer();
 		updateCurrentQuestionLabel();
+		
 
 		if (candidate != null) {
 			firstNameLabel.setText("First Name: " + candidate.getFirstName());
@@ -245,8 +249,11 @@ public class ExaminationFormController {
 			if (currentQuestionIndex == 19) {
 				submitButton.setVisible(true);
 
-			}
-			;
+			};
+			
+			
+			
+
 
 			if (currentQuestionIndex == 14) {
 				// Show image views for options
@@ -291,27 +298,32 @@ public class ExaminationFormController {
 
 	@FXML
 	private void nextButtonClicked() {
-		// Get the selected option for the current question and add it to the list
-		RadioButton selectedRadioButton = (RadioButton) toggleGroup.getSelectedToggle();
-		if (selectedRadioButton != null) {
-			String selectedOption = selectedRadioButton.getText();
-			selectedOptions.add(selectedOption);
-		} else {
-			// Handle the case where no option is selected, if needed
-		}
+	    // Get the selected option for the current question and add it to the list
+	    RadioButton selectedRadioButton = (RadioButton) toggleGroup.getSelectedToggle();
+	    if (selectedRadioButton != null) {
+	        String selectedOption = selectedRadioButton.getText();
+	        selectedOptions.add(selectedOption);
+	    } else {
+	        // Handle the case where no option is selected if needed
+	        selectedOptions.add(""); // Add an empty string to indicate no selection
+	    }
 
-		// Move to the next question and update the UI
-		currentQuestionIndex++;
+	    // Move to the next question and update the UI
+	    currentQuestionIndex++;
 
-		// Disable the "Next" button after reaching question number 20
-		if (currentQuestionIndex >= 20) {
-			nextButton.setDisable(true);
-			
-		}
+	    // Disable the "Next" button after reaching question number 20
+	    if (currentQuestionIndex >= 20) {
+	        nextButton.setDisable(true);
+	    }
 
-		updateQuestion();
-		updateCurrentQuestionLabel();
+	    updateQuestion();
+	    updateCurrentQuestionLabel();
+
+	    // Restore the selected state for the next question
+	    restoreSelectedState();
 	}
+
+
 
 	@FXML
 	private void backButtonClicked() {
@@ -324,10 +336,12 @@ public class ExaminationFormController {
 
 			updateQuestion();
 			updateCurrentQuestionLabel();
+			 restoreSelectedState();
 
 			// Remove the last selected option when going back
 			if (!selectedOptions.isEmpty()) {
 				selectedOptions.remove(selectedOptions.size() - 1);
+				
 			}
 		}
 	}
@@ -421,6 +435,40 @@ public class ExaminationFormController {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+	}
+	
+	//new
+	
+	
+	private void restoreSelectedState() {
+	    // Check if the currentQuestionIndex is within the bounds of selectedOptions
+	    if (currentQuestionIndex < selectedOptions.size()) {
+	        // Retrieve the selected option for the current question
+	        String selectedOption = selectedOptions.get(currentQuestionIndex);
+
+	        // Select the previously selected option if it exists
+	        if (!selectedOption.isEmpty()) {
+	            toggleGroup.selectToggle(getRadioButtonByText(selectedOption));
+	        } else {
+	            // If no option is selected, clear the selection
+	            toggleGroup.selectToggle(null);
+	        }
+	    }
+	}
+
+	
+	private RadioButton getRadioButtonByText(String text) {
+	    // Helper method to get the RadioButton by text
+	    if (text.equals(optionARadioButton.getText())) {
+	        return optionARadioButton;
+	    } else if (text.equals(optionBRadioButton.getText())) {
+	        return optionBRadioButton;
+	    } else if (text.equals(optionCRadioButton.getText())) {
+	        return optionCRadioButton;
+	    } else if (text.equals(optionDRadioButton.getText())) {
+	        return optionDRadioButton;
+	    }
+	    return null;
 	}
 
 	// Existing code...

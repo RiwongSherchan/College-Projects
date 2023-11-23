@@ -19,103 +19,106 @@ import javafx.stage.Stage;
 
 public class AdminLoginController {
 
-	@FXML
-	private TextField emailField;
+    // JavaFX components defined in the FXML file
+    @FXML
+    private TextField emailField;
 
-	@FXML
-	private PasswordField passwordField;
+    @FXML
+    private PasswordField passwordField;
 
-	@FXML
-	private Button LoginButton;
+    @FXML
+    private Button LoginButton;
 
-	@FXML
-	private Button CancelButton;
+    @FXML
+    private Button CancelButton;
 
-	@FXML
-	private void loginButtonClicked(ActionEvent event) {
-		// Implement your login logic here
-		String email = emailField.getText();
-		String password = passwordField.getText();
+    // Handler for the "Login" button click
+    @FXML
+    private void loginButtonClicked(ActionEvent event) {
+        // Implement your login logic here
+        String email = emailField.getText();
+        String password = passwordField.getText();
 
-		try (BufferedReader reader = new BufferedReader(new FileReader("src/Admin.txt"))) {
-			String line;
-			while ((line = reader.readLine()) != null) {
-				String[] components = line.split(",");
-				if (components.length >= 2 && email.equals(components[0]) && password.equals(components[1])) {
-					System.out.println("User authenticated!");
+        try (BufferedReader reader = new BufferedReader(new FileReader("src/Admin.txt"))) {
+            String line;
+            while ((line = reader.readLine()) != null) {
+                String[] components = line.split(",");
+                // Check if the credentials match any line in the Admin.txt file
+                if (components.length >= 2 && email.equals(components[0]) && password.equals(components[1])) {
+                    System.out.println("User authenticated!");
 
-					FXMLLoader loader = new FXMLLoader(getClass().getResource("/application/fxml/AdminDashboard.fxml"));
+                    // Load the AdminDashboard.fxml file and open the admin dashboard
+                    FXMLLoader loader = new FXMLLoader(getClass().getResource("/application/fxml/AdminDashboard.fxml"));
+                    Parent root = null;
+                    try {
+                        root = loader.load();
 
-					Parent root = null;
-					try {
-						root = loader.load();
+                        // Get the controller instance and initialize it if needed
+                        AdminDashboardController controller = loader.getController();
+                        controller.initialize(); // You can modify this method name as per your need
 
-						// Get the controller instance and initialize it if needed
-						AdminDashboardController controller = loader.getController();
-						controller.initialize(); // You can modify this method name as per your need
-						Stage CloseCurrentStage = (Stage) LoginButton.getScene().getWindow();
-						CloseCurrentStage.close();
+                        // Close the current login stage
+                        Stage CloseCurrentStage = (Stage) LoginButton.getScene().getWindow();
+                        CloseCurrentStage.close();
 
-						Stage stage = new Stage();
-						stage.setTitle("Admin Dashboard");
-						stage.setScene(new Scene(root));
-						stage.show();
+                        // Open the Admin Dashboard stage
+                        Stage stage = new Stage();
+                        stage.setTitle("Admin Dashboard");
+                        stage.setScene(new Scene(root));
+                        stage.show();
 
-						// Close the current stage if needed
+                        // Close the current stage if needed
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
 
-					} catch (IOException e) {
-						e.printStackTrace();
-					}
+                } else {
+                    // Display an error message if the login fails
+                    System.out.println("Login failed");
+                    showAlert("Login Failed", "Invalid credentials. Please try again.");
+                }
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 
-				} else {
-					System.out.println("failed");
-					System.out.println("Login failed");
-					showAlert("Login Failed", "Invalid credentials. Please try again.");
-				}
+    // Handler for the "Cancel" button click
+    @FXML
+    private void cancelButtonClicked(ActionEvent event) {
+        // Load the home.fxml file and open the home stage
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/application/fxml/home.fxml"));
+        Parent root = null;
+        try {
+            root = loader.load();
 
-			}
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-	}
+            // Get the controller instance and initialize it if needed
+            HomeController controller = loader.getController();
 
-	@FXML
-	private void cancelButtonClicked(ActionEvent event) {
-		
-		FXMLLoader loader = new FXMLLoader(getClass().getResource("/application/fxml/home.fxml"));
-	
-		Parent root = null;
-		try {
-			root = loader.load();
-			System.out.println("check 4");
-			// Get the controller instance and initialize it if needed
-			HomeController controller = loader.getController();
+            // Close the current login stage
+            Stage currentStage = (Stage) CancelButton.getScene().getWindow();
+            currentStage.close();
 
-			// Close the current stage
-			Stage currentStage = (Stage) CancelButton.getScene().getWindow();
-			currentStage.close();
+            // Open the home stage
+            Stage stage = new Stage();
+            stage.setTitle("Home");
+            stage.setScene(new Scene(root));
+            stage.show();
 
-			
-			Stage stage = new Stage();
-			stage.setTitle("Home");
-			stage.setScene(new Scene(root));
-			stage.show();
+            // Close the current stage if needed
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 
-			// Close the current stage if needed
+    // Display an alert with the given title and message
+    private void showAlert(String title, String message) {
+        Alert alert = new Alert(AlertType.ERROR);
+        alert.setTitle(title);
+        alert.setHeaderText(null);
+        alert.setContentText(message);
+        alert.showAndWait();
+    }
 
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-	}
-
-	private void showAlert(String title, String message) {
-		Alert alert = new Alert(AlertType.ERROR);
-		alert.setTitle(title);
-		alert.setHeaderText(null);
-		alert.setContentText(message);
-		alert.showAndWait();
-	}
-
-	// You can add more methods as needed, such as a method to validate credentials
-
+   
 }
