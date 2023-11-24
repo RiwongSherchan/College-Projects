@@ -1,0 +1,67 @@
+/* admin-dashboard.css */
+
+/* Style for the main AnchorPane */
+.root {
+    -fx-background-color: #f4f4f4; /* Light gray background color */
+}
+
+/* Style for the VBox containing the header */
+.vbox-header {
+    -fx-background-color: #3498db; /* Blue background color */
+    -fx-padding: 10px;
+}
+
+/* Style for the Label in the header */
+.label-header {
+    -fx-font-size: 24;
+    -fx-font-weight: bold;
+    -fx-text-fill: white; /* White text color */
+}
+
+/* Style for the AnchorPane containing candidate details */
+#candidateDetailsPane {
+    -fx-background-color: #ffffff; /* White background color */
+    -fx-padding: 20px;
+    -fx-border-color: #3498db; /* Blue border color */
+    -fx-border-width: 2px;
+    -fx-border-radius: 5px;
+}
+
+/* Style for the HBox containing candidate information */
+.hbox-candidate-info {
+    -fx-spacing: 10px;
+}
+
+/* Style for the Labels in the candidate information HBox */
+.label-candidate-info {
+    -fx-font-size: 16;
+    -fx-text-fill: #333333; /* Dark gray text color */
+}
+
+/* Style for the Labels displaying score, selected answers, and correct answers */
+.label-details {
+    -fx-font-size: 18;
+    -fx-font-weight: bold;
+    -fx-text-fill: #3498db; /* Blue text color */
+}
+
+/* Style for the Logout Button */
+#LogoutButton {
+    -fx-background-color: #e74c3c; /* Red background color */
+    -fx-text-fill: white; /* White text color */
+    -fx-font-size: 18;
+    -fx-pref-width: 150;
+    -fx-border-color: #c0392b; /* Dark red border color */
+    -fx-border-width: 2px;
+    -fx-border-radius: 5px;
+}
+
+/* Style for the ComboBox */
+#candidatesDropdown {
+    -fx-pref-width: 200;
+}
+
+/* Optional: Style for QuestionLabel */
+
+
+/* Optional: Add more styles as needed */

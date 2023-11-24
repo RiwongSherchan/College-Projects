@@ -1,0 +1,66 @@
+/* candidate-registration.css */
+
+/* Style for the main AnchorPane */
+.anchor-pane {
+    -fx-background-color: #ecf0f1; /* Light blue-gray background color */
+}
+
+/* Style for the title label */
+.title {
+    -fx-font-family: "Baskerville Old Face";
+    -fx-font-size: 24;
+    -fx-padding: 20px;
+    -fx-text-fill: #3498db; /* Blue text color */
+    -fx-alignment: center;
+}
+
+/* Style for labels */
+.label {
+    -fx-font-size: 16;
+    -fx-text-fill: #2c3e50; /* Dark blue text color */
+    -fx-padding: 5px;
+}
+
+/* Style for text fields */
+.text-field {
+    -fx-pref-width: 300;
+    -fx-pref-height: 30;
+    -fx-padding: 8px;
+    -fx-border-color: #3498db; /* Blue border color */
+    -fx-border-width: 2px;
+    -fx-border-radius: 5px;
+    -fx-background-radius: 5px;
+}
+
+/* Style for radio buttons */
+.radio-button {
+    -fx-font-size: 16;
+    -fx-text-fill: #2c3e50; /* Dark blue text color */
+    -fx-padding: 5px;
+}
+
+/* Style for buttons */
+.button {
+    -fx-background-color: #3498db; /* Blue background color */
+    -fx-text-fill: white; /* White text color */
+    -fx-font-size: 15;
+    -fx-pref-width: 150;
+    -fx-pref-height: 40;
+    -fx-padding: 10px;
+    -fx-border-color: #2980b9; /* Dark blue border color */
+    -fx-border-width: 2px;
+    -fx-border-radius: 5px;
+    -fx-background-radius: 5px;
+}
+
+/* Hover effect for buttons */
+.button:hover {
+    -fx-background-color: #2980b9; /* Darker blue on hover */
+}
+
+/* Optional: Style for radio buttons selected text color */
+.radio-button:selected {
+    -fx-text-fill: #2980b9; /* White text color for selected radio buttons */
+}
+
+/* Optional: Add more styles as needed */

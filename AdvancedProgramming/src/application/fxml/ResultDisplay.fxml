@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- ResultDisplay.fxml -->
+
+<?import javafx.scene.chart.PieChart?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="700" prefWidth="1000" stylesheets="@../resources/styles/ResultDisplay.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.controller.ResultDisplayController">
+   <children>
+        <Label fx:id="firstNameLabel" layoutX="36.0" layoutY="45.0" prefHeight="18.0" prefWidth="235.0" text="ss" />
+        <Label fx:id="genderLabel" layoutX="36.0" layoutY="78.0" prefHeight="18.0" prefWidth="250.0" text="ss" />
+        <Label fx:id="countryLabel" layoutX="36.0" layoutY="107.0" prefHeight="26.0" prefWidth="164.0" text="ss" />
+        <Label fx:id="resultLabel" layoutX="388.0" layoutY="87.0" prefHeight="18.0" prefWidth="439.0" text="ss" />
+        <Button fx:id="returnButton" layoutX="100.0" layoutY="327.0" onAction="#returnButtonClicked" prefHeight="70.0" prefWidth="214.0" text="Return to Dashboard" />
+        <PieChart fx:id="pieChart" layoutX="381.0" layoutY="137.0" prefHeight="462.0" prefWidth="562.0" />
+      <Label layoutX="30.0" layoutY="14.0" prefHeight="18.0" prefWidth="740.0" text="                                                    Result">
+         <font>
+            <Font name="Arial Rounded MT Bold" size="24.0" />
+         </font>
+      </Label>
+      <ImageView fx:id="countryFlagImageView" fitHeight="26.0" fitWidth="50.0" layoutX="214.0" layoutY="108.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../resources/fxml_images/malaysiaflag.jpg" />
+         </image>
+      </ImageView>
+   </children>
+</AnchorPane>

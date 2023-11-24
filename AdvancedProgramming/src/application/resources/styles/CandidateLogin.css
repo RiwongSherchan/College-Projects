@@ -1,0 +1,49 @@
+/* CandidateLogin.css */
+
+/* Style for the AnchorPane */
+.anchor-pane {
+    -fx-background-color: rgb(128, 255, 255); /* Light gray background color */
+}
+
+/* Style for the User Login label */
+.label-title {
+    -fx-font-size: 24;
+    -fx-font-weight: bold;
+    -fx-text-fill: #333333; /* Dark gray text color */
+}
+
+/* Style for the login status label */
+.label-status {
+    -fx-text-fill: red;
+}
+
+/* Style for the TextFields */
+.text-field {
+    -fx-background-color: #ffffff; /* White background color */
+    -fx-border-color: #333333; /* Dark gray border color */
+    -fx-prompt-text-fill: #666666; /* Medium gray prompt text color */
+}
+
+/* Style for the PasswordField */
+.password-field {
+    -fx-background-color: #ffffff; /* White background color */
+    -fx-border-color: #333333; /* Dark gray border color */
+    -fx-prompt-text-fill: #666666; /* Medium gray prompt text color */
+}
+
+/* Style for the Buttons */
+.button {
+    -fx-background-color: #27ae60; /* Green background color */
+    -fx-text-fill: white; /* White text color */
+    -fx-font-weight: bold;
+}
+
+/* Hover effect for Buttons */
+.button:hover {
+    -fx-background-color: #219653; /* Darker green background color on hover */
+}
+
+/* Pressed effect for Buttons */
+.button:pressed {
+    -fx-background-color: #1e8449; /* Even darker green background color when pressed */
+}

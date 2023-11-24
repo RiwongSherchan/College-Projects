@@ -1,0 +1,35 @@
+/* candidateDashboard.css */
+
+.root {
+    -fx-background-color: #e0f7fa; /* Light Blue Background */
+}
+
+#firstNameLabel, #lastNameLabel, #genderLabel {
+    -fx-font-size: 18px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #333; /* Dark Gray Text Color */
+}
+
+.button {
+    -fx-background-color: #2196F3; /* Blue Button Color */
+    -fx-text-fill: #fff; /* White Text Color */
+    -fx-font-size: 16px;
+    -fx-font-weight: bold;
+    -fx-padding: 8px 16px; /* Padding for a more prominent button */
+}
+
+.button:hover {
+    -fx-background-color: #1565c0; /* Darker Blue on Hover */
+}
+
+.label {
+    -fx-font-size: 20px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #333; /* Dark Gray Text Color */
+}
+
+.title {
+    -fx-font-size: 24px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #333; /* Dark Gray Text Color */
+}

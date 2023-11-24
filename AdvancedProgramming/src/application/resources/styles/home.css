@@ -1,0 +1,33 @@
+.label {
+    -fx-font-size: 16;
+    -fx-text-fill: #2ecc71;
+}
+
+.button {
+    -fx-font-size: 14;
+    -fx-background-color: #27ae60;
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+}
+
+#AdminLoginButton {
+    -fx-background-color: #2980b9; /* Adjust color for admin button */
+}
+
+#CandidateLoginButton {
+    -fx-background-color: #e74c3c; /* Adjust color for candidate button */
+}
+
+#UserRegistrationButton {
+    -fx-background-color: #f39c12; /* Adjust color for registration button */
+}
+
+#welcomeLabel {
+    -fx-font-size: 18;
+    -fx-font-weight: bold;
+    -fx-text-fill: #2ecc71;
+}
+
+#image {
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.8), 10, 0, 0, 0);
+}
