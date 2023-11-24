@@ -10,4 +10,4 @@ SE : Software Engineering.
 
 MLPC : Machine Learning and Parrallel Computing.
 
-AdvancedProgramming : Destop app using javaFx
+AdvancedProgramming : Desktop app using javaFx
